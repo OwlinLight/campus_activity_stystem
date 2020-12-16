@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.zjut.common.dao.ActivityDao">
+    <resultMap id="ActivityMap" type="Activity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+    </resultMap>
+    <sql id="Activity_List">
+        id,name,start_time,end_time
+    </sql>
+    <select id="listAllActivity" resultMap="ActivityMap">
+        select
+        <include refid="Activity_List"/>
+        from activity
+    </select>
+    <select id="getActivity" resultMap="ActivityMap">
+        select
+        <include refid="Activity_List"/>
+        from activity
+        where id=#{id}
+    </select>
+    <insert id="createActivity" parameterType="cn.edu.zjut.common.domain.Activity">
+        <!-- selectKey获取新增的主键 -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into activity (name, start_time, end_time) values (#{name,jdbcType=VARCHAR},
+        #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateActivity" parameterType="Long">
+        update activity
+        set
+        <if test="name != null">
+            name = #{name}
+        </if>
+        <if test="id != null">
+            ,start_time = #{startTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="id != null">
+            ,end_time = #{endTime,jdbcType=TIMESTAMP}
+        </if>
+        where id=#{id,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteActivity" parameterType="java.lang.Long">
+        delete from activity
+        where id=#{id,jdbcType=INTEGER}
+    </delete>
+</mapper>
