@@ -19,9 +19,9 @@ public class UserController {
     @Autowired
     private UserService userserver;
 
-    @RequestMapping(value = "/user/LoginUser/{staff_id}/{password}", method = RequestMethod.POST)
+    @RequestMapping(value = "/activity/LoginUser", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<User> LoginUser(@PathVariable("staff_id") String staff_id, @PathVariable("password") String password) {
+    public CommonResult<User> LoginUser(@RequestParam(value="userName")String staff_id, @RequestParam(value = "password")String password) {
         CommonResult commonResult;
         User user = (User) userserver.LoginUser(staff_id, password);
         if (user == null) {
@@ -33,7 +33,7 @@ public class UserController {
         return commonResult;
     }
 
-    @RequestMapping(value = "/user/createUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/activity/createUser", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult createUser(@RequestBody User user) {
         CommonResult commonResult;
