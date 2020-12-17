@@ -5,23 +5,27 @@ import cn.edu.zjut.common.api.CommonResult;
 import cn.edu.zjut.common.domain.User;
 import cn.edu.zjut.common.service.UserService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
+@Api(
+        tags = {"UserController"},
+        description = "用户管理"
+)
 @CrossOrigin // 允许所有ip跨域
 @Controller
 public class UserController {
     @Autowired
     private UserService userserver;
 
+    @ApiOperation("用户登录")
     @RequestMapping(value = "/activity/LoginUser", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<User> LoginUser(@RequestParam(value="userName")String staff_id, @RequestParam(value = "password")String password) {
+    public CommonResult<User> LoginUser(@RequestParam(value = "userName") String staff_id, @RequestParam(value = "password") String password) {
         CommonResult commonResult;
         User user = (User) userserver.LoginUser(staff_id, password);
         if (user == null) {
@@ -33,16 +37,15 @@ public class UserController {
         return commonResult;
     }
 
+    @ApiOperation("用户注册")
     @RequestMapping(value = "/activity/createUser", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult createUser(@RequestBody User user) {
         CommonResult commonResult;
         int count = userserver.createUser(user);
-        if (count == 1)
-        {
+        if (count == 1) {
             commonResult = CommonResult.success(user);
-        }else
-        {
+        } else {
             commonResult = CommonResult.failed("注册失败");
         }
         return commonResult;
