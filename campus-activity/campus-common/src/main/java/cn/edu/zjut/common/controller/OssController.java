@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * Oss相关操作接口
  */
+@CrossOrigin // 允许所有ip跨域
 @Controller
 @Api(tags = {"OssController"}, description = "Oss管理")
 @RequestMapping({"/aliyun/oss"})
@@ -25,14 +27,8 @@ public class OssController {
     @Autowired
     private OssServiceImpl ossService;
 
-    public OssController() {
-    }
-
     @ApiOperation("oss上传签名生成")
-    @RequestMapping(
-            value = {"/policy"},
-            method = {RequestMethod.GET}
-    )
+    @RequestMapping(value = {"/policy"}, method = {RequestMethod.GET})
     @ResponseBody
     public CommonResult<OssPolicyResult> policy() {
         OssPolicyResult result = this.ossService.policy();
@@ -40,10 +36,7 @@ public class OssController {
     }
 
     @ApiOperation("oss上传成功回调")
-    @RequestMapping(
-            value = {"callback"},
-            method = {RequestMethod.POST}
-    )
+    @RequestMapping(value = {"callback"}, method = {RequestMethod.POST})
     @ResponseBody
     public CommonResult<OssCallbackResult> callback(HttpServletRequest request) {
         OssCallbackResult ossCallbackResult = this.ossService.callback(request);

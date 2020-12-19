@@ -13,7 +13,7 @@
         <result column="class" jdbcType="VARCHAR" property="user_class"/>
     </resultMap>
     <sql id="User1">id, staff_id,password, name, role, college_id, class</sql>
-    <select id="LoginUser" resultMap="UserMap">
+    <select id="loginUser" resultMap="UserMap">
         select
         <include refid="User1"/>
         from user where staff_id=#{staff_id} and password=#{password}
