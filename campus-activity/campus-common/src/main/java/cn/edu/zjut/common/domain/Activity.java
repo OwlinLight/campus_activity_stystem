@@ -22,6 +22,43 @@ public class Activity implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date endTime;
 
+    private Long college_id;
+    private Long position_id;
+    private Long director_id;
+    private Long status_id;
+
+    public Long getCollege_id() {
+        return college_id;
+    }
+
+    public void setCollege_id(Long college_id) {
+        this.college_id = college_id;
+    }
+
+    public Long getPosition_id() {
+        return position_id;
+    }
+
+    public void setPosition_id(Long position_id) {
+        this.position_id = position_id;
+    }
+
+    public Long getDirector_id() {
+        return director_id;
+    }
+
+    public void setDirector_id(Long director_id) {
+        this.director_id = director_id;
+    }
+
+    public Long getStatus_id() {
+        return status_id;
+    }
+
+    public void setStatus_id(Long status_id) {
+        this.status_id = status_id;
+    }
+
     public Long getId() {
         return id;
     }

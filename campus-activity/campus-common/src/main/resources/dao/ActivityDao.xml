@@ -8,9 +8,13 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
         <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="college_id" jdbcType="INTEGER" property="college_id"/>
+        <result column="position_id" jdbcType="INTEGER" property="director_id"/>
+        <result column="director_id" jdbcType="INTEGER" property="director_id"/>
+        <result column="status_id" jdbcType="INTEGER" property="status_id"/>
     </resultMap>
     <sql id="Activity_List">
-        id,name,start_time,end_time
+        id,name,start_time,end_time, college_id,position_id,director_id,status_id
     </sql>
     <select id="listAllActivity" resultMap="ActivityMap">
         select
