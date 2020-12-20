@@ -20,7 +20,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public List<Activity> listAllActivity() {
-        return activityDao.listAllActivity();
+        return activityDao.listActivityPassed();
     }
 
     @Override
@@ -40,9 +40,15 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Activity> listActivity(int pageNum, int pageSize) {
+    public List<Activity> listActivityPassed(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        return activityDao.listAllActivity();
+        return activityDao.listActivityPassed();
+    }
+
+    @Override
+    public List<Activity> listActivityFailed(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return activityDao.listActivityFailed();
     }
 
     @Override

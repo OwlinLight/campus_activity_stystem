@@ -14,7 +14,9 @@ public interface ActivityService {
 
     int deleteActivity(Long id);
 
-    List<Activity> listActivity(int pageNum, int pageSize);
+    List<Activity> listActivityPassed(int pageNum, int pageSize);
+
+    List<Activity> listActivityFailed(int pageNum, int pageSize);
 
     Activity getActivity(Long id);
 }

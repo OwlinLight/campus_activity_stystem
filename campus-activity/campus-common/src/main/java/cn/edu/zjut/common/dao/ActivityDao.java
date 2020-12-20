@@ -8,7 +8,9 @@ import java.util.List;
  * Created by iris on 2020/12/11.
  */
 public interface ActivityDao {
-    List<Activity> listAllActivity();
+    List<Activity> listActivityPassed();
+
+    List<Activity> listActivityFailed();
 
     int createActivity(Activity activity);
 

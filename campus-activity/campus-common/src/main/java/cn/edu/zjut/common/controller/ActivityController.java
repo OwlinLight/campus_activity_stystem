@@ -85,12 +85,22 @@ public class ActivityController {
     }
 
     @ApiOperation("分页查询活动列表")
-    @RequestMapping(value = "/activity/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/activity/listPassed", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<CommonPage<Activity>> listActivity(
+    public CommonResult<CommonPage<Activity>> listActivityPassed(
             @RequestParam(value = "pageNum", defaultValue = "1") @ApiParam("页码") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "5") @ApiParam("每页数量") Integer pageSize) {
-        List<Activity> activityList = activityService.listActivity(pageNum, pageSize);
+        List<Activity> activityList = activityService.listActivityPassed(pageNum, pageSize);
+        return CommonResult.success(CommonPage.restPage(activityList));
+    }
+
+    @ApiOperation("分页查询活动列表")
+    @RequestMapping(value = "/activity/listFailed", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<CommonPage<Activity>> listActivityFailed(
+            @RequestParam(value = "pageNum", defaultValue = "1") @ApiParam("页码") Integer pageNum,
+            @RequestParam(value = "pageSize", defaultValue = "5") @ApiParam("每页数量") Integer pageSize) {
+        List<Activity> activityList = activityService.listActivityFailed(pageNum, pageSize);
         return CommonResult.success(CommonPage.restPage(activityList));
     }
 
@@ -120,4 +130,8 @@ public class ActivityController {
         }
     }
 
+    public static void main(String[] args) {
+        ActivityController activityController = new ActivityController();
+        activityController.getActivityList();
+    }
 }

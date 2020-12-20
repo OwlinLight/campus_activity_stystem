@@ -14,12 +14,17 @@
         <result column="status_id" jdbcType="INTEGER" property="status_id"/>
     </resultMap>
     <sql id="Activity_List">
-        id,name,start_time,end_time, college_id,position_id,director_id,status_id
+        activity.id,activity.name,start_time,end_time, college_id,position_id,director_id,status_id
     </sql>
-    <select id="listAllActivity" resultMap="ActivityMap">
+    <select id="listActivityPassed" resultMap="ActivityMap">
         select
         <include refid="Activity_List"/>
-        from activity
+        from activity inner JOIN status  on activity.status_id = status.id and result = 'pass'
+    </select>
+    <select id="listActivityFailed" resultMap="ActivityMap">
+        select
+        <include refid="Activity_List"/>
+        from activity inner JOIN status  on activity.status_id = status.id and result = 'wait'
     </select>
     <select id="getActivity" resultMap="ActivityMap">
         select
@@ -46,6 +51,18 @@
         </if>
         <if test="id != null">
             ,end_time = #{endTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="college_id != null">
+            ,college_id = #{college_id}
+        </if>
+        <if test="director_id != null">
+            ,director_id = #{director_id}
+        </if>
+        <if test="status_id != null">
+            ,status_id = #{status_id}
+        </if>
+        <if test="position_id != null">
+            ,position_id = #{name}
         </if>
         where id=#{id,jdbcType=INTEGER}
     </update>
