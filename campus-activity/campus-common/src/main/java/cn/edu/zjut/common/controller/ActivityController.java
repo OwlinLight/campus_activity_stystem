@@ -3,6 +3,7 @@ package cn.edu.zjut.common.controller;
 import cn.edu.zjut.common.api.CommonPage;
 import cn.edu.zjut.common.api.CommonResult;
 import cn.edu.zjut.common.domain.Activity;
+import cn.edu.zjut.common.domain.Status;
 import cn.edu.zjut.common.service.ActivityService;
 
 import io.swagger.annotations.Api;
@@ -83,6 +84,23 @@ public class ActivityController {
         }
         return commonResult;
     }
+
+    @ApiOperation("更新活动")
+    @RequestMapping(value = "/activity/updateStatus", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateStatus(@RequestBody Status status) {
+        CommonResult commonResult;
+        int count = activityService.updateActivityStatus(status);
+        if (count == 1) {
+            commonResult = CommonResult.success("更新成功");
+//            LOGGER.debug("updateActivity success:{}", id);
+        } else {
+            commonResult = CommonResult.failed("操作失败");
+//            LOGGER.debug("updateActivity failed:{}", id);
+        }
+        return commonResult;
+    }
+
 
     @ApiOperation("分页查询活动列表")
     @RequestMapping(value = "/activity/listPassed", method = RequestMethod.GET)

@@ -2,6 +2,7 @@ package cn.edu.zjut.common.service.impl;
 
 import cn.edu.zjut.common.dao.ActivityDao;
 import cn.edu.zjut.common.domain.Activity;
+import cn.edu.zjut.common.domain.Status;
 import cn.edu.zjut.common.service.ActivityService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class ActivityServiceImpl implements ActivityService {
     public int updateActivity(Long id, Activity activity) {
         activity.setId(id);
         return activityDao.updateActivity(activity);
+    }
+
+    @Override
+    public int updateActivityStatus(Status status) {
+        return activityDao.updateStatus(status);
     }
 
     @Override

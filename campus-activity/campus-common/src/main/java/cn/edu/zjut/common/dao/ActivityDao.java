@@ -1,6 +1,7 @@
 package cn.edu.zjut.common.dao;
 
 import cn.edu.zjut.common.domain.Activity;
+import cn.edu.zjut.common.domain.Status;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public interface ActivityDao {
     int createActivity(Activity activity);
 
     int updateActivity(Activity activity);
+
+    int updateStatus(Status status);
 
     int deleteActivity(Long id);
 

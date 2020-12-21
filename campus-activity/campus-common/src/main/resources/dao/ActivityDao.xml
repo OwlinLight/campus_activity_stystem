@@ -66,6 +66,11 @@
         </if>
         where id=#{id,jdbcType=INTEGER}
     </update>
+    <update id="updateStatus" parameterType="cn.edu.zjut.common.domain.Status">
+        update activity a,status b set b.result = #{result},
+        b.deal_time = #{deal_time} where a.status_id = b.id and a.id = #{activity_id}
+
+    </update>
     <delete id="deleteActivity" parameterType="java.lang.Long">
         delete from activity
         where id=#{id,jdbcType=INTEGER}
