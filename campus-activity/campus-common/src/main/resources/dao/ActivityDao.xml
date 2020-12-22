@@ -37,8 +37,8 @@
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into activity (name, start_time, end_time) values (#{name,jdbcType=VARCHAR},
-        #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
+        insert into activity (name, start_time, end_time,college_id,position_id, director_id, status_id) values (#{name,jdbcType=VARCHAR},
+        #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{college_id,jdbcType=INTEGER}, #{position_id,jdbcType=INTEGER}, #{director_id,jdbcType=INTEGER}, #{status_id,jdbcType=INTEGER})
     </insert>
     <update id="updateActivity" parameterType="Long">
         update activity
