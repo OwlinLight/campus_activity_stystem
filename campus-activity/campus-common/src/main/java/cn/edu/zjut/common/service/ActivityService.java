@@ -1,6 +1,7 @@
 package cn.edu.zjut.common.service;
 
 import cn.edu.zjut.common.domain.Activity;
+import cn.edu.zjut.common.domain.Keywords;
 import cn.edu.zjut.common.domain.Status;
 
 import java.util.List;
@@ -22,4 +23,5 @@ public interface ActivityService {
     List<Activity> listActivityFailed(int pageNum, int pageSize);
 
     Activity getActivity(Long id);
+    List<Activity> askBykeywords(Keywords keywords);
 }

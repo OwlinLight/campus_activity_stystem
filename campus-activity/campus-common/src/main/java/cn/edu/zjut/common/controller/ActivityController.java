@@ -3,6 +3,7 @@ package cn.edu.zjut.common.controller;
 import cn.edu.zjut.common.api.CommonPage;
 import cn.edu.zjut.common.api.CommonResult;
 import cn.edu.zjut.common.domain.Activity;
+import cn.edu.zjut.common.domain.Keywords;
 import cn.edu.zjut.common.domain.Status;
 import cn.edu.zjut.common.service.ActivityService;
 
@@ -83,6 +84,13 @@ public class ActivityController {
             LOGGER.debug("updateActivity failed:{}", activity);
         }
         return commonResult;
+    }
+
+    @ApiOperation("通过关键词查找")
+    @RequestMapping(value = "/activity/askBykeywords", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult<List<Activity>> askBykeywords(@RequestBody Keywords keywords) {
+        return CommonResult.success(activityService.askBykeywords(keywords));
     }
 
     @ApiOperation("更新活动")

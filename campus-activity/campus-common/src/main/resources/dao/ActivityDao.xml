@@ -19,12 +19,33 @@
     <select id="listActivityPassed" resultMap="ActivityMap">
         select
         <include refid="Activity_List"/>
-        from activity inner JOIN status  on activity.status_id = status.id and result = 'pass'
+        from activity inner JOIN status on activity.status_id = status.id and result = 'pass'
     </select>
     <select id="listActivityFailed" resultMap="ActivityMap">
         select
         <include refid="Activity_List"/>
-        from activity inner JOIN status  on activity.status_id = status.id and result = 'wait'
+        from activity inner JOIN status on activity.status_id = status.id and result = 'wait'
+    </select>
+    <!--    通过关键词查找-->
+    <select id="askBykeywords" parameterType="cn.edu.zjut.common.domain.Keywords" resultMap="ActivityMap">
+        select *
+        from activity t1, college t2, auditor t3
+        where t1.college_id = t2.id and t1.director_id = t3.id
+        <if test="activityName != null">
+            and POSITION(#{activityName} IN t1.name)
+        </if>
+        <if test="collegeName">
+            and t2.name = #{collegeName}
+        </if>
+        <if test="directorName">
+            and t3.name = #{directorName}
+        </if>
+        <if test="startTime">
+            and unix_timestamp(t1.start_time) > unix_timestamp(#{startTime, jdbcType=TIMESTAMP})
+        </if>
+        <if test="endTime">
+            and unix_timestamp(t1.end_time) &lt; unix_timestamp(#{endTime, jdbcType=TIMESTAMP})
+        </if>
     </select>
     <select id="getActivity" resultMap="ActivityMap">
         select
@@ -37,8 +58,10 @@
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into activity (name, start_time, end_time,college_id,position_id, director_id, status_id) values (#{name,jdbcType=VARCHAR},
-        #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{college_id,jdbcType=INTEGER}, #{position_id,jdbcType=INTEGER}, #{director_id,jdbcType=INTEGER}, #{status_id,jdbcType=INTEGER})
+        insert into activity (name, start_time, end_time,college_id,position_id, director_id, status_id) values
+        (#{name,jdbcType=VARCHAR},
+        #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{college_id,jdbcType=INTEGER},
+        #{position_id,jdbcType=INTEGER}, #{director_id,jdbcType=INTEGER}, #{status_id,jdbcType=INTEGER})
     </insert>
     <update id="updateActivity" parameterType="Long">
         update activity

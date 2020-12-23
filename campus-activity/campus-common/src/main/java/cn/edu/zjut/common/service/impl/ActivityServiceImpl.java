@@ -2,6 +2,7 @@ package cn.edu.zjut.common.service.impl;
 
 import cn.edu.zjut.common.dao.ActivityDao;
 import cn.edu.zjut.common.domain.Activity;
+import cn.edu.zjut.common.domain.Keywords;
 import cn.edu.zjut.common.domain.Status;
 import cn.edu.zjut.common.service.ActivityService;
 import com.github.pagehelper.PageHelper;
@@ -60,5 +61,10 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public Activity getActivity(Long id) {
         return activityDao.getActivity(id);
+    }
+
+    @Override
+    public List<Activity> askBykeywords(Keywords keywords) {
+        return activityDao.askBykeywords(keywords);
     }
 }
