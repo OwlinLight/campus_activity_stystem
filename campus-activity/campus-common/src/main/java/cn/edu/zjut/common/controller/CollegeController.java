@@ -24,7 +24,7 @@ public class CollegeController {
     @Autowired
     private CollegeService collegeService;
 
-    @ApiOperation("获取所有学员信息")
+    @ApiOperation("获取所有学院信息")
     @RequestMapping(value = "/activity/college/listAll", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<College>> getActivityList() {

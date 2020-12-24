@@ -37,23 +37,12 @@ public class Swagger2Config {
                 .build();
     }
 
-    /*    private ApiInfo apiInfo() {
-            return new ApiInfoBuilder()
-                    .title("Campus-activity")
-                    .description("Campus-activity在线API文档")
-                    .version("1.0")
-                    .build();
-        }*/
     private ApiInfo apiInfo() {
-        Contact contact = new Contact("浙江工业大学", "http://www.zjut.edu.cn/", "xx@zjut.edu.cn");
-        return new ApiInfo(
-                "Campus-activity", // 标题
-                "Campus-activity在线API文档", // 描述
-                "v1.0", // 版本
-                "http://www.zjut.edu.cn/", // 组织链接
-                contact,
-                "Apach 2.0 许可", // 许可
-                "许可链接"// 许可链接
-        );
+        return new ApiInfoBuilder()
+                .title("Campus-activity")
+                .description("Campus-activity在线API文档")
+                .version("1.0")
+                .build();
     }
+
 }

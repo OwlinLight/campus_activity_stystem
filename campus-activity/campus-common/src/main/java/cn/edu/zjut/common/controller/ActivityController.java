@@ -146,6 +146,7 @@ public class ActivityController {
         }
     }
 
+    @ApiOperation("活动签到")
     @RequestMapping(value = "/activity/signed", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<String> signedActivity(
@@ -161,8 +162,4 @@ public class ActivityController {
         }
     }
 
-    public static void main(String[] args) {
-        ActivityController activityController = new ActivityController();
-        activityController.getActivityList();
-    }
 }
