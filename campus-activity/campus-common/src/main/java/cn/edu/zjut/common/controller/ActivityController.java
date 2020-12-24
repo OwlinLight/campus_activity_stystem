@@ -4,6 +4,7 @@ import cn.edu.zjut.common.api.CommonPage;
 import cn.edu.zjut.common.api.CommonResult;
 import cn.edu.zjut.common.domain.Activity;
 import cn.edu.zjut.common.domain.Keywords;
+import cn.edu.zjut.common.domain.Showac;
 import cn.edu.zjut.common.domain.Status;
 import cn.edu.zjut.common.service.ActivityService;
 
@@ -36,7 +37,7 @@ public class ActivityController {
     @ApiOperation("获取所有活动列表")
     @RequestMapping(value = "/activity/listAll", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<List<Activity>> getActivityList() {
+    public CommonResult<List<Showac>> getActivityList() {
         return CommonResult.success(activityService.listAllActivity());
     }
 
@@ -89,8 +90,12 @@ public class ActivityController {
     @ApiOperation("通过关键词查找")
     @RequestMapping(value = "/activity/askBykeywords", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult<List<Activity>> askBykeywords(@RequestBody Keywords keywords) {
-        return CommonResult.success(activityService.askBykeywords(keywords));
+    public CommonResult<CommonPage<Showac>> askBykeywords(
+            @RequestParam(value = "pageNum", defaultValue = "1") @ApiParam("页码") Integer pageNum,
+            @RequestParam(value = "pageSize", defaultValue = "5") @ApiParam("每页数量") Integer pageSize,
+            @RequestBody Keywords keywords) {
+        List<Showac> activityList = activityService.askBykeywords(pageNum, pageSize, keywords);
+        return CommonResult.success(CommonPage.restPage(activityList));
     }
 
     @ApiOperation("更新活动")
@@ -113,20 +118,20 @@ public class ActivityController {
     @ApiOperation("分页查询活动列表")
     @RequestMapping(value = "/activity/listPassed", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<CommonPage<Activity>> listActivityPassed(
+    public CommonResult<CommonPage<Showac>> listActivityPassed(
             @RequestParam(value = "pageNum", defaultValue = "1") @ApiParam("页码") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "5") @ApiParam("每页数量") Integer pageSize) {
-        List<Activity> activityList = activityService.listActivityPassed(pageNum, pageSize);
+        List<Showac> activityList = activityService.listActivityPassed(pageNum, pageSize);
         return CommonResult.success(CommonPage.restPage(activityList));
     }
 
     @ApiOperation("分页查询活动列表")
     @RequestMapping(value = "/activity/listFailed", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<CommonPage<Activity>> listActivityFailed(
+    public CommonResult<CommonPage<Showac>> listActivityFailed(
             @RequestParam(value = "pageNum", defaultValue = "1") @ApiParam("页码") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "5") @ApiParam("每页数量") Integer pageSize) {
-        List<Activity> activityList = activityService.listActivityFailed(pageNum, pageSize);
+        List<Showac> activityList = activityService.listActivityFailed(pageNum, pageSize);
         return CommonResult.success(CommonPage.restPage(activityList));
     }
 
@@ -141,6 +146,7 @@ public class ActivityController {
         }
     }
 
+    @ApiOperation("活动签到")
     @RequestMapping(value = "/activity/signed", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<String> signedActivity(
@@ -156,11 +162,4 @@ public class ActivityController {
         }
     }
 
-
-
-
-    public static void main(String[] args) {
-        ActivityController activityController = new ActivityController();
-        activityController.getActivityList();
-    }
 }

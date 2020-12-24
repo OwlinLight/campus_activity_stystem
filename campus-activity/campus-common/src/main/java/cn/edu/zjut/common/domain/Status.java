@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Status {
     private int id;
     private int activity_id;

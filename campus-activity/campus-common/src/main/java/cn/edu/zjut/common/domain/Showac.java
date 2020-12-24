@@ -1,31 +1,21 @@
 package cn.edu.zjut.common.domain;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
 
-
-public class Keywords {
+public class Showac implements Serializable {
+    private Long id;
     private String activityName;
-    private String collegeName;
-    private String directorName;
-    private String status;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date startTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date endTime;
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    private String collegeName;
+    private String directorName;
 
     public String getActivityName() {
         return activityName;
@@ -35,20 +25,12 @@ public class Keywords {
         this.activityName = activityName;
     }
 
-    public String getCollegeName() {
-        return collegeName;
+    public Long getId() {
+        return id;
     }
 
-    public void setCollegeName(String collegeName) {
-        this.collegeName = collegeName;
-    }
-
-    public String getDirectorName() {
-        return directorName;
-    }
-
-    public void setDirectorName(String directorName) {
-        this.directorName = directorName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getStartTime() {
@@ -65,5 +47,22 @@ public class Keywords {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+
+    public String getCollegeName() {
+        return collegeName;
+    }
+
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
+    }
+
+    public String getDirectorName() {
+        return directorName;
+    }
+
+    public void setDirectorName(String directorName) {
+        this.directorName = directorName;
     }
 }

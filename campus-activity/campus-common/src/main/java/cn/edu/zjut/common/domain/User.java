@@ -9,9 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class User implements Serializable{
     private Integer id;
     private String staff_id;

@@ -2,13 +2,14 @@ package cn.edu.zjut.common.service;
 
 import cn.edu.zjut.common.domain.Activity;
 import cn.edu.zjut.common.domain.Keywords;
+import cn.edu.zjut.common.domain.Showac;
 import cn.edu.zjut.common.domain.Status;
 
 import java.util.List;
 
 public interface ActivityService {
 
-    List<Activity> listAllActivity();
+    List<Showac> listAllActivity();
 
     int createActivity(Activity activity);
 
@@ -18,10 +19,11 @@ public interface ActivityService {
 
     int deleteActivity(Long id);
 
-    List<Activity> listActivityPassed(int pageNum, int pageSize);
+    List<Showac> listActivityPassed(int pageNum, int pageSize);
 
-    List<Activity> listActivityFailed(int pageNum, int pageSize);
+    List<Showac> listActivityFailed(int pageNum, int pageSize);
 
     Activity getActivity(Long id);
-    List<Activity> askBykeywords(Keywords keywords);
+
+    List<Showac> askBykeywords(int pageNum, int pageSize, Keywords keywords);
 }

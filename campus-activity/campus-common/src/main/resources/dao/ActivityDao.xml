@@ -13,37 +13,72 @@
         <result column="director_id" jdbcType="INTEGER" property="director_id"/>
         <result column="status_id" jdbcType="INTEGER" property="status_id"/>
     </resultMap>
+    <resultMap id="ShowacMap" type="Showac">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="activityName"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="college.name" jdbcType="VARCHAR" property="collegeName"/>
+        <result column="auditor.name" jdbcType="VARCHAR" property="directorName"/>
+    </resultMap>
     <sql id="Activity_List">
         activity.id,activity.name,start_time,end_time, college_id,position_id,director_id,status_id
     </sql>
-    <select id="listActivityPassed" resultMap="ActivityMap">
-        select
-        <include refid="Activity_List"/>
-        from activity inner JOIN status on activity.status_id = status.id and result = 'pass'
+<!--    关键字查找的select-->
+    <sql id="Activity_List2">
+        activity.id,activity.name,activity.start_time,activity.end_time, college.name,auditor.name
+    </sql>
+    <select id="listActivityPassed" resultMap="ShowacMap">
+        select t1.id,t1.name as activityName,t1.start_time,t1.end_time, t2.name as collegeName,t3.name as directorName
+        from activity t1, college t2, auditor t3, status t4
+        where t1.status_id = t4.id and result = 'pass' and  t1.college_id = t2.id and t1.director_id = t3.id
     </select>
     <select id="listActivityFailed" resultMap="ActivityMap">
-        select
-        <include refid="Activity_List"/>
-        from activity inner JOIN status on activity.status_id = status.id and result = 'wait'
+        select t1.id,t1.name as activityName,t1.start_time,t1.end_time, t2.name as collegeName,t3.name as directorName
+        from activity t1, college t2, auditor t3, status t4
+        where t1.status_id = t4.id and result = 'fail' and  t1.college_id = t2.id and t1.director_id = t3.id
     </select>
     <!--    通过关键词查找-->
-    <select id="askBykeywords" parameterType="cn.edu.zjut.common.domain.Keywords" resultMap="ActivityMap">
-        select *
-        from activity t1, college t2, auditor t3
-        where t1.college_id = t2.id and t1.director_id = t3.id
+<!--    <select id="askBykeywords" parameterType="cn.edu.zjut.common.domain.Keywords" resultMap="ActivityMap">-->
+<!--        select t1.*-->
+<!--        from activity t1, college t2, auditor t3-->
+<!--        where t1.college_id = t2.id and t1.director_id = t3.id-->
+<!--        <if test="activityName != null">-->
+<!--            and POSITION(#{activityName} IN t1.name)-->
+<!--        </if>-->
+<!--        <if test="collegeName != null">-->
+<!--            and t2.name = #{collegeName}-->
+<!--        </if>-->
+<!--        <if test="directorName != null">-->
+<!--            and t3.name = #{directorName}-->
+<!--        </if>-->
+<!--        <if test="startTime != null">-->
+<!--            and unix_timestamp(t1.start_time) > unix_timestamp(#{startTime, jdbcType=TIMESTAMP})-->
+<!--        </if>-->
+<!--        <if test="endTime != null">-->
+<!--            and unix_timestamp(t1.end_time) &lt; unix_timestamp(#{endTime, jdbcType=TIMESTAMP})-->
+<!--        </if>-->
+<!--    </select>-->
+
+    <!--    通过关键词查找2-->
+    <select id="askBykeywords" parameterType="cn.edu.zjut.common.domain.Keywords" resultMap="ShowacMap">
+        select t1.id,t1.name as activityName,t1.start_time,t1.end_time, t2.name as collegeName,t3.name as directorName
+        from activity t1, college t2, auditor t3, status t4
+        where t1.college_id = t2.id and t1.director_id = t3.id and t4.result = #{status} and t4.id = t1.status_id
         <if test="activityName != null">
             and POSITION(#{activityName} IN t1.name)
         </if>
-        <if test="collegeName">
-            and t2.name = #{collegeName}
+        <if test="collegeName != null">
+            and POSITION(#{collegeName} IN t2.name)
         </if>
-        <if test="directorName">
-            and t3.name = #{directorName}
+
+        <if test="directorName != null">
+            and POSITION(#{directorName} IN t3.name)
         </if>
-        <if test="startTime">
+        <if test="startTime != null">
             and unix_timestamp(t1.start_time) > unix_timestamp(#{startTime, jdbcType=TIMESTAMP})
         </if>
-        <if test="endTime">
+        <if test="endTime != null">
             and unix_timestamp(t1.end_time) &lt; unix_timestamp(#{endTime, jdbcType=TIMESTAMP})
         </if>
     </select>
