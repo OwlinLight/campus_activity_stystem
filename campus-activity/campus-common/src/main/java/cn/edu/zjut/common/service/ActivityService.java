@@ -23,5 +23,6 @@ public interface ActivityService {
     List<Activity> listActivityFailed(int pageNum, int pageSize);
 
     Activity getActivity(Long id);
-    List<Activity> askBykeywords(Keywords keywords);
+
+    List<Activity> askBykeywords(int pageNum, int pageSize, Keywords keywords);
 }

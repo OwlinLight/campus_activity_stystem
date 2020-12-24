@@ -48,13 +48,13 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public List<Activity> listActivityPassed(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         return activityDao.listActivityPassed();
     }
 
     @Override
     public List<Activity> listActivityFailed(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         return activityDao.listActivityFailed();
     }
 
@@ -64,7 +64,8 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Activity> askBykeywords(Keywords keywords) {
+    public List<Activity> askBykeywords(int pageNum, int pageSize,Keywords keywords) {
+        PageHelper.startPage(pageNum, pageSize);
         return activityDao.askBykeywords(keywords);
     }
 }
