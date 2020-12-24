@@ -1,9 +1,7 @@
 package cn.edu.zjut.common.dao;
 
-import cn.edu.zjut.common.domain.Activity;
-import cn.edu.zjut.common.domain.ActivityInfo;
-import cn.edu.zjut.common.domain.Keywords;
-import cn.edu.zjut.common.domain.Status;
+import cn.edu.zjut.common.domain.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,4 +11,7 @@ import java.util.List;
 public interface ActivityInfoDao {
 
     ActivityInfo getActivityInfo(Long id);
+
+    int updatePeopleLimit(@Param("id")Long id, @Param("limit")int limit);
+
 }

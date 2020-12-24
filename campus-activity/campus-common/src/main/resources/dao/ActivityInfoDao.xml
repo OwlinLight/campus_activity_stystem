@@ -32,4 +32,10 @@
         WHERE activity.id = #{id} and `status`.result = 'pass'
     </select>
 
+    <update id="updatePeopleLimit">
+        UPDATE activity_info
+        SET people_limit = ${limit}
+        WHERE activity_id = ${id}
+    </update>
+
 </mapper>

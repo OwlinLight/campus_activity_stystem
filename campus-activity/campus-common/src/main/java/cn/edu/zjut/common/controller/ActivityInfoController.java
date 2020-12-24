@@ -2,10 +2,7 @@ package cn.edu.zjut.common.controller;
 
 import cn.edu.zjut.common.api.CommonPage;
 import cn.edu.zjut.common.api.CommonResult;
-import cn.edu.zjut.common.domain.Activity;
-import cn.edu.zjut.common.domain.ActivityInfo;
-import cn.edu.zjut.common.domain.Keywords;
-import cn.edu.zjut.common.domain.Status;
+import cn.edu.zjut.common.domain.*;
 import cn.edu.zjut.common.service.ActivityInfoService;
 import cn.edu.zjut.common.service.ActivityService;
 import io.swagger.annotations.Api;
@@ -46,7 +43,21 @@ public class ActivityInfoController {
         }
     }
 
-
+    @ApiOperation("更新指定id的限定人数")
+    @RequestMapping(value = "/activityInfo/update/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateActivity(@PathVariable("id") Long id, @RequestBody int limit) {
+        CommonResult commonResult;
+        int count = activityInfoService.updatePeopleLimit(id, limit);
+        if (count == 1) {
+            commonResult = CommonResult.success(limit);
+            LOGGER.debug("updateActivity success:{}", limit);
+        } else {
+            commonResult = CommonResult.failed("操作失败");
+            LOGGER.debug("updateActivity failed:{}", limit);
+        }
+        return commonResult;
+    }
     
     public static void main(String[] args) {
         ActivityInfoController activityController = new ActivityInfoController();
