@@ -4,6 +4,7 @@ import cn.edu.zjut.common.api.CommonPage;
 import cn.edu.zjut.common.api.CommonResult;
 import cn.edu.zjut.common.domain.Activity;
 import cn.edu.zjut.common.domain.Keywords;
+import cn.edu.zjut.common.domain.Showac;
 import cn.edu.zjut.common.domain.Status;
 import cn.edu.zjut.common.service.ActivityService;
 
@@ -89,11 +90,11 @@ public class ActivityController {
     @ApiOperation("通过关键词查找")
     @RequestMapping(value = "/activity/askBykeywords", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult<CommonPage<Activity>> askBykeywords(
+    public CommonResult<CommonPage<Showac>> askBykeywords(
             @RequestParam(value = "pageNum", defaultValue = "1") @ApiParam("页码") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "5") @ApiParam("每页数量") Integer pageSize,
             @RequestBody Keywords keywords) {
-        List<Activity> activityList = activityService.askBykeywords(pageNum, pageSize, keywords);
+        List<Showac> activityList = activityService.askBykeywords(pageNum, pageSize, keywords);
         return CommonResult.success(CommonPage.restPage(activityList));
     }
 

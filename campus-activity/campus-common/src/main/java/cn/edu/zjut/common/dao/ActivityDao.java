@@ -3,6 +3,7 @@ package cn.edu.zjut.common.dao;
 import cn.edu.zjut.common.domain.Activity;
 import cn.edu.zjut.common.domain.Keywords;
 import cn.edu.zjut.common.domain.Status;
+import cn.edu.zjut.common.domain.Showac;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public interface ActivityDao {
     int deleteActivity(Long id);
 
     Activity getActivity(Long id);
-    List<Activity> askBykeywords(Keywords keywords);
+    List<Showac> askBykeywords(Keywords keywords);
 
 
 }

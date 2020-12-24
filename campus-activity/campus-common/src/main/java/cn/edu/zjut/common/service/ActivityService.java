@@ -2,6 +2,7 @@ package cn.edu.zjut.common.service;
 
 import cn.edu.zjut.common.domain.Activity;
 import cn.edu.zjut.common.domain.Keywords;
+import cn.edu.zjut.common.domain.Showac;
 import cn.edu.zjut.common.domain.Status;
 
 import java.util.List;
@@ -24,5 +25,5 @@ public interface ActivityService {
 
     Activity getActivity(Long id);
 
-    List<Activity> askBykeywords(int pageNum, int pageSize, Keywords keywords);
+    List<Showac> askBykeywords(int pageNum, int pageSize, Keywords keywords);
 }
