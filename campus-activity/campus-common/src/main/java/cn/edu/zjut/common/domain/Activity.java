@@ -11,9 +11,6 @@ import java.util.Date;
 /**
  * Created by iris on 2020/12/11.
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Activity implements Serializable {
     private Long id;
     private String name;
