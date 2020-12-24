@@ -89,11 +89,12 @@ public class ActivityController {
     @ApiOperation("通过关键词查找")
     @RequestMapping(value = "/activity/askBykeywords", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult<List<Activity>> askBykeywords(
+    public CommonResult<CommonPage<Activity>> askBykeywords(
             @RequestParam(value = "pageNum", defaultValue = "1") @ApiParam("页码") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "5") @ApiParam("每页数量") Integer pageSize,
             @RequestBody Keywords keywords) {
-        return CommonResult.success(activityService.askBykeywords(pageNum, pageSize, keywords));
+        List<Activity> activityList = activityService.askBykeywords(pageNum, pageSize, keywords);
+        return CommonResult.success(CommonPage.restPage(activityList));
     }
 
     @ApiOperation("更新活动")
