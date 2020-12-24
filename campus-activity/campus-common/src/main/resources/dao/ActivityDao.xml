@@ -63,8 +63,8 @@
     <!--    通过关键词查找2-->
     <select id="askBykeywords" parameterType="cn.edu.zjut.common.domain.Keywords" resultMap="ShowacMap">
         select t1.id,t1.name as activityName,t1.start_time,t1.end_time, t2.name as collegeName,t3.name as directorName
-        from activity t1, college t2, auditor t3
-        where t1.college_id = t2.id and t1.director_id = t3.id
+        from activity t1, college t2, auditor t3, status t4
+        where t1.college_id = t2.id and t1.director_id = t3.id and t4.result = #{status} and t4.id = t1.status_id
         <if test="activityName != null">
             and POSITION(#{activityName} IN t1.name)
         </if>

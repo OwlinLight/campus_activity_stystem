@@ -13,10 +13,19 @@ public class Keywords {
     private String activityName;
     private String collegeName;
     private String directorName;
+    private String status;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date startTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date endTime;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getActivityName() {
         return activityName;
