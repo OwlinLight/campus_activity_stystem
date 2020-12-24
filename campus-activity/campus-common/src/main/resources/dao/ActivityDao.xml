@@ -28,15 +28,15 @@
     <sql id="Activity_List2">
         activity.id,activity.name,activity.start_time,activity.end_time, college.name,auditor.name
     </sql>
-    <select id="listActivityPassed" resultMap="ActivityMap">
-        select
-        <include refid="Activity_List"/>
-        from activity inner JOIN status on activity.status_id = status.id and result = 'pass'
+    <select id="listActivityPassed" resultMap="ShowacMap">
+        select t1.id,t1.name as activityName,t1.start_time,t1.end_time, t2.name as collegeName,t3.name as directorName
+        from activity t1, college t2, auditor t3, status t4
+        where t1.status_id = t4.id and result = 'pass' and  t1.college_id = t2.id and t1.director_id = t3.id
     </select>
     <select id="listActivityFailed" resultMap="ActivityMap">
-        select
-        <include refid="Activity_List"/>
-        from activity inner JOIN status on activity.status_id = status.id and result = 'wait'
+        select t1.id,t1.name as activityName,t1.start_time,t1.end_time, t2.name as collegeName,t3.name as directorName
+        from activity t1, college t2, auditor t3, status t4
+        where t1.status_id = t4.id and result = 'fail' and  t1.college_id = t2.id and t1.director_id = t3.id
     </select>
     <!--    通过关键词查找-->
 <!--    <select id="askBykeywords" parameterType="cn.edu.zjut.common.domain.Keywords" resultMap="ActivityMap">-->

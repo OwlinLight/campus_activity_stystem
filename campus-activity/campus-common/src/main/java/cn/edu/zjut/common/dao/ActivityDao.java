@@ -11,9 +11,9 @@ import java.util.List;
  * Created by iris on 2020/12/11.
  */
 public interface ActivityDao {
-    List<Activity> listActivityPassed();
+    List<Showac> listActivityPassed();
 
-    List<Activity> listActivityFailed();
+    List<Showac> listActivityFailed();
 
     int createActivity(Activity activity);
 

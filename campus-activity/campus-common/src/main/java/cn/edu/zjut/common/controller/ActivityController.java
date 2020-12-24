@@ -37,7 +37,7 @@ public class ActivityController {
     @ApiOperation("获取所有活动列表")
     @RequestMapping(value = "/activity/listAll", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<List<Activity>> getActivityList() {
+    public CommonResult<List<Showac>> getActivityList() {
         return CommonResult.success(activityService.listAllActivity());
     }
 
@@ -118,20 +118,20 @@ public class ActivityController {
     @ApiOperation("分页查询活动列表")
     @RequestMapping(value = "/activity/listPassed", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<CommonPage<Activity>> listActivityPassed(
+    public CommonResult<CommonPage<Showac>> listActivityPassed(
             @RequestParam(value = "pageNum", defaultValue = "1") @ApiParam("页码") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "5") @ApiParam("每页数量") Integer pageSize) {
-        List<Activity> activityList = activityService.listActivityPassed(pageNum, pageSize);
+        List<Showac> activityList = activityService.listActivityPassed(pageNum, pageSize);
         return CommonResult.success(CommonPage.restPage(activityList));
     }
 
     @ApiOperation("分页查询活动列表")
     @RequestMapping(value = "/activity/listFailed", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<CommonPage<Activity>> listActivityFailed(
+    public CommonResult<CommonPage<Showac>> listActivityFailed(
             @RequestParam(value = "pageNum", defaultValue = "1") @ApiParam("页码") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "5") @ApiParam("每页数量") Integer pageSize) {
-        List<Activity> activityList = activityService.listActivityFailed(pageNum, pageSize);
+        List<Showac> activityList = activityService.listActivityFailed(pageNum, pageSize);
         return CommonResult.success(CommonPage.restPage(activityList));
     }
 
