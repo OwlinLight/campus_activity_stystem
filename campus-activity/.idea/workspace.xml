@@ -28,6 +28,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="659124f8-b7e5-426a-b736-70872ad84b47" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/.idea/artifacts/campus_common_Web_exploded.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
@@ -117,6 +118,9 @@
       <change beforePath="$PROJECT_DIR$/campus-common/target/classes/cn/edu/zjut/common/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/campus-common/target/classes/cn/edu/zjut/common/service/impl/UserServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campus-common/target/classes/dao/ActivityDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/campus-common/target/classes/dao/ActivityDao.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campus-common/target/classes/dao/UserDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/campus-common/target/classes/dao/UserDao.xml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/campus-common/campus-common.iml" beforeDir="false" afterPath="$PROJECT_DIR$/campus-common/campus-common.iml" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,6 +135,15 @@
     </option>
   </component>
   <component name="Git.Settings">
+<<<<<<< Updated upstream
+=======
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+>>>>>>> Stashed changes
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="LogFilters">
@@ -270,7 +283,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1608789014022</updated>
+<<<<<<< Updated upstream
       <workItem from="1608789015146" duration="10430000" />
+=======
+      <workItem from="1608789015146" duration="14247000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
@@ -301,10 +318,17 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="59" width="1089" height="765" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1608791046583" />
+<<<<<<< Updated upstream
     <state x="958" y="99" key="#com.intellij.ide.util.MemberChooser" timestamp="1608799073163">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="958" y="99" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1608799073163" />
+=======
+    <state x="958" y="99" key="#com.intellij.ide.util.MemberChooser" timestamp="1608816296787">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="958" y="99" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1608816296787" />
+>>>>>>> Stashed changes
     <state x="557" y="319" key="#com.intellij.javaee.module.view.web.EditWebRootDialog" timestamp="1608789181096">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -313,6 +337,7 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1608797534060" />
+<<<<<<< Updated upstream
     <state width="1024" height="210" key="GridCell.Tab.0.bottom" timestamp="1608799281951">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -361,6 +386,56 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1024" height="210" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1608799281733" />
+=======
+    <state width="1024" height="210" key="GridCell.Tab.0.bottom" timestamp="1608818330689">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1608818330689" />
+    <state width="1024" height="210" key="GridCell.Tab.0.center" timestamp="1608818330689">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1608818330689" />
+    <state width="1024" height="210" key="GridCell.Tab.0.left" timestamp="1608818330689">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1608818330689" />
+    <state width="1024" height="210" key="GridCell.Tab.0.right" timestamp="1608818330689">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1608818330689" />
+    <state width="1024" height="210" key="GridCell.Tab.1.bottom" timestamp="1608818330689">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1608818330689" />
+    <state width="1024" height="210" key="GridCell.Tab.1.center" timestamp="1608818330689">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1608818330689" />
+    <state width="1024" height="210" key="GridCell.Tab.1.left" timestamp="1608818330689">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1608818330689" />
+    <state width="1024" height="210" key="GridCell.Tab.1.right" timestamp="1608818330689">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1608818330689" />
+    <state width="1024" height="210" key="GridCell.Tab.2.bottom" timestamp="1608818330690">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1608818330690" />
+    <state width="1024" height="210" key="GridCell.Tab.2.center" timestamp="1608818330690">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1608818330690" />
+    <state width="1024" height="210" key="GridCell.Tab.2.left" timestamp="1608818330689">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1608818330689" />
+    <state width="1024" height="210" key="GridCell.Tab.2.right" timestamp="1608818330690">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1608818330690" />
+>>>>>>> Stashed changes
     <state x="341" y="114" key="RollbackChangesDialog" timestamp="1608800112153">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -369,9 +444,23 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1608790842420" />
+<<<<<<< Updated upstream
+=======
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1608818258619">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1608818258619" />
+>>>>>>> Stashed changes
     <state x="319" y="0" width="1231" height="572" key="dock-window-1" timestamp="1608799204186">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="319" y="0" width="1231" height="572" key="dock-window-1/0.0.1536.824@0.0.1536.824" timestamp="1608799204186" />
+<<<<<<< Updated upstream
+=======
+    <state x="545" y="158" key="refactoring.ChangeSignatureDialog" timestamp="1608818060990">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="545" y="158" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1608818060990" />
+>>>>>>> Stashed changes
   </component>
 </project>
