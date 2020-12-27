@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -106,10 +105,8 @@ public class ActivityController {
         int count = activityService.updateActivityStatus(status);
         if (count == 1) {
             commonResult = CommonResult.success("更新成功");
-//            LOGGER.debug("updateActivity success:{}", id);
         } else {
             commonResult = CommonResult.failed("操作失败");
-//            LOGGER.debug("updateActivity failed:{}", id);
         }
         return commonResult;
     }
@@ -143,22 +140,6 @@ public class ActivityController {
             return CommonResult.success(activityService.getActivity(id));
         } else {
             return CommonResult.failed();
-        }
-    }
-
-    @ApiOperation("活动签到")
-    @RequestMapping(value = "/activity/signed", method = RequestMethod.GET)
-    @ResponseBody
-    public CommonResult<String> signedActivity(
-            @RequestParam(value = "id") long id,
-            @RequestParam(value = "date") long date) {
-        long now_date = new Date().getTime();
-        System.out.println(id + "  " + date + " 11 " + now_date);
-        if (now_date - date > 0 && now_date - date < 300000 && activityService.getActivity(id) != null) {
-            //数据库代码
-            return CommonResult.success("签到成功");
-        } else {
-            return CommonResult.failed("签到失败");
         }
     }
 

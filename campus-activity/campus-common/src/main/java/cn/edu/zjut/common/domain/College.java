@@ -1,8 +1,5 @@
 package cn.edu.zjut.common.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
 public class College {

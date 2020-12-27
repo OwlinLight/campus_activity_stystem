@@ -1,21 +1,15 @@
 package cn.edu.zjut.common.controller;
 
-import cn.edu.zjut.common.api.CommonPage;
 import cn.edu.zjut.common.api.CommonResult;
 import cn.edu.zjut.common.domain.*;
 import cn.edu.zjut.common.service.ActivityInfoService;
-import cn.edu.zjut.common.service.ActivityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -57,10 +51,5 @@ public class ActivityInfoController {
             LOGGER.debug("updateActivity failed:{}", limit);
         }
         return commonResult;
-    }
-    
-    public static void main(String[] args) {
-        ActivityInfoController activityController = new ActivityInfoController();
-
     }
 }

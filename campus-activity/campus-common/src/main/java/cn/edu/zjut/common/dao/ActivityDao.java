@@ -24,6 +24,7 @@ public interface ActivityDao {
     int deleteActivity(Long id);
 
     Activity getActivity(Long id);
+
     List<Showac> askBykeywords(Keywords keywords);
 
 

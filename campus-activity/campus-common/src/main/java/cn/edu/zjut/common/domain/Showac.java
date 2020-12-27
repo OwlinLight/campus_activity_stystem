@@ -49,7 +49,6 @@ public class Showac implements Serializable {
         this.endTime = endTime;
     }
 
-
     public String getCollegeName() {
         return collegeName;
     }
