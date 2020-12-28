@@ -23,7 +23,7 @@ public class Participation {
     private Date enrollTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date quitTime;
-    private String studentName;
+    private String staffName;
     private String activityName;
     private String collegeName;
     private String className;

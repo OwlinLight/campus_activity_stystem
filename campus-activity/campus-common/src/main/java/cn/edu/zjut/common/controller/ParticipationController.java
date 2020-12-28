@@ -1,8 +1,10 @@
 package cn.edu.zjut.common.controller;
 
+import cn.edu.zjut.common.api.CommonPage;
 import cn.edu.zjut.common.api.CommonResult;
 import cn.edu.zjut.common.domain.Participation;
 import cn.edu.zjut.common.service.ParticipationService;
+import cn.edu.zjut.common.utils.POIUtils;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
@@ -13,12 +15,14 @@ import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.io.ByteArrayOutputStream;
 import java.util.Base64;
+import java.util.List;
 
 
 /**
@@ -85,5 +89,32 @@ public class ParticipationController {
             return CommonResult.failed();
         }
     }
+
+    @ApiOperation("分页展示一场活动参加情况")
+    @GetMapping("/activity/listParticipation/{activityId}")
+    @ResponseBody
+    public CommonResult<CommonPage<Participation>> listParticipation(
+            @RequestParam(value = "pageNum", defaultValue = "1") @ApiParam("页码") Integer pageNum,
+            @RequestParam(value = "pageSize", defaultValue = "5") @ApiParam("每页数量") Integer pageSize,
+            @PathVariable("activityId") Long activityId) {
+        List<Participation> participationList = (List<Participation>) participationService.listParticipation(pageNum, pageSize, activityId);
+        return CommonResult.success(CommonPage.restPage(participationList));
+    }
+
+    @ApiOperation("导出活动参加情况为Excel")
+    @GetMapping("/activity/export/{activityId}")
+    @ResponseBody
+    public CommonResult<String> exportData(@PathVariable("activityId") Long activityId) {
+        List<Participation> participationList = (List<Participation>) participationService.listAllParticipation(activityId);
+        ResponseEntity<byte[]> responseEntity = POIUtils.employee2Excel(participationList);
+        Base64.Encoder encoder = Base64.getEncoder();
+        //这边网上没有查到，responseEntity.getBody()是我自己写的，也不知道对不对，返回的data好像是对的
+        String excelText = encoder.encodeToString(responseEntity.getBody());
+        return CommonResult.success(excelText);
+    }
+//    public ResponseEntity<byte[]> exportData(@PathVariable("activityId") Long activityId) {
+//        List<Participation> participationList = (List<Participation>) participationService.listAllParticipation(activityId);
+//        return POIUtils.employee2Excel(participationList);
+//    }
 
 }

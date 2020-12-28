@@ -7,11 +7,13 @@ import cn.edu.zjut.common.domain.Participation;
 import cn.edu.zjut.common.service.ParticipationService;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
+import com.github.pagehelper.PageHelper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by iris on 2020/12/27.
@@ -55,6 +57,17 @@ public class ParticipationServiceImpl implements ParticipationService {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<Participation> listParticipation(Integer pageNum, Integer pageSize, Long activityId) {
+        PageHelper.startPage(pageNum, pageSize);
+        return participationDao.listParticipation(activityId);
+    }
+
+    @Override
+    public List<Participation> listAllParticipation(Long activityId) {
+        return participationDao.listParticipation(activityId);
     }
 
 }

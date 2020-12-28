@@ -30,7 +30,6 @@ public class UserController {
         User user = (User) userserver.loginUser(staff_id, password);
         if (user == null) {
             commonResult = CommonResult.failed("登录失败");
-
         } else {
             commonResult = CommonResult.success(user);
         }
