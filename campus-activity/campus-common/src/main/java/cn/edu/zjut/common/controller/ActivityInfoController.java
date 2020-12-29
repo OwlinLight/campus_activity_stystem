@@ -27,7 +27,7 @@ public class ActivityInfoController {
 
 
     @ApiOperation("获取指定id的活动详细信息")
-    @RequestMapping(value = "/activityInfo/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/activity/activityInfo/{id}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<ActivityInfo> activity(@PathVariable("id") Long id) {
         if (activityInfoService.getActivityInfo(id) != null) {
@@ -38,7 +38,7 @@ public class ActivityInfoController {
     }
 
     @ApiOperation("更新指定id的限定人数")
-    @RequestMapping(value = "/activityInfo/update/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/activity/activityInfo/update/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult updateActivity(@PathVariable("id") Long id, @RequestBody int limit) {
         CommonResult commonResult;

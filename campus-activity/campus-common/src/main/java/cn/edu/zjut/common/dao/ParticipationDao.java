@@ -13,4 +13,6 @@ public interface ParticipationDao {
     int updateParticipation(Participation participation);
 
     List<Participation> listParticipation(Long activityId);
+
+    int findParticipation(Participation participation);
 }

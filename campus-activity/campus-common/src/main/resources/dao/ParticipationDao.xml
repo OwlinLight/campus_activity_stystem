@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.zjut.common.dao.ParticipationDao">
+    <resultMap id="ParticipationMap" type="cn.edu.zjut.common.domain.Participation">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="staffId" jdbcType="INTEGER" property="staffId"/>
+        <result column="activityId" jdbcType="INTEGER" property="activityId"/>
+    </resultMap>
+    <select id="findParticipation" parameterType="cn.edu.zjut.common.domain.Participation" resultType="INTEGER">
+        select count(*) from participation where staff_id = #{staffId} and activity_id = #{activityId}
+    </select>
+
+    <update id="updateParticipation" parameterType="cn.edu.zjut.common.domain.Participation" >
+        update participation set enroll_time = #{enrollTime} where staff_id = #{staffId} and activity_id = #{activityId}
+    </update>
+</mapper>

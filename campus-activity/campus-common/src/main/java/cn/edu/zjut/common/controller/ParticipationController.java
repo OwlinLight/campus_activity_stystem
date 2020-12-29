@@ -59,6 +59,7 @@ public class ParticipationController {
     public CommonResult<String> enrollActivity(
             @RequestBody Participation participation) {
         CommonResult commonResult;
+        System.out.println(participation);
         boolean enrollResult = participationService.enrollActivity(participation);
         if (enrollResult) {
             commonResult = CommonResult.success("签到成功");
@@ -78,7 +79,8 @@ public class ParticipationController {
             //baseUrl要修改为填写签到表单的url,并且activityId需要传过去
 //            String baseUrl = "http://10.87.238.84:8080/activity/enroll?";
 //            String url = baseUrl + "?activity_id=" + activityId;
-            String url = "http://10.87.238.84:8080/activity/swagger-ui.html";
+            String url = "http://192.168.31.226/enroll.jsp?id="+activityId;
+            System.out.println(url);
             BitMatrix bitMatrix = qrCodeWriter.encode(url, BarcodeFormat.QR_CODE, 600, 600);
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             MatrixToImageWriter.writeToStream(bitMatrix, "PNG", outputStream);

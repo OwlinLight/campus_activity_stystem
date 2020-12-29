@@ -40,6 +40,10 @@ public class ParticipationServiceImpl implements ParticipationService {
     @Override
     public boolean enrollActivity(Participation participation) {
         //可以提前30min签到，活动开始30min后禁止签到
+        int flag = participationDao.findParticipation(participation);
+        if(flag != 1){
+            return false;
+        }
         Date enrollTime = DateUtil.date();
         Activity activity = activityDao.getActivity(participation.getActivityId());
         Date startTime = activity.getStartTime();

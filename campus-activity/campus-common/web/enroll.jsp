@@ -1,0 +1,56 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: chenlj
+  Date: 2020/12/29
+  Time: 22:42
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function submit() {
+            // var activityId = document.getElementById("activityId").value;
+            var activityId = 8
+            var staffId = document.getElementById("staffId").value;
+            var myData = {
+                "activityId": activityId,
+                "staffId": staffId,
+            };
+            var result ;
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1/activity/enroll",
+                data: JSON.stringify(myData),
+                contentType: "application/json;charset=UTF-8",
+                success:function (callback) {
+                    result = callback;   // 赋值给刚才定义的值
+                    alert(result.message)
+
+                }
+            });
+        }
+    </script>
+
+        <table>
+            <tr>
+                <td colspan="2">签到表单</td>
+            </tr>
+
+            <tr>
+                <td>工号：</td>
+                <td><input type="text" id="staffId"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="提交" onclick="submit()">
+                    <input type="reset" name="重置">
+            </tr>
+        </table>
+</body>
+</html>
