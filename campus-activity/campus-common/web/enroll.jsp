@@ -13,9 +13,19 @@
 <body>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
+        function getQueryVariable(variable)
+        {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                if(pair[0] == variable){return pair[1];}
+            }
+            return(false);
+        }
         function submit() {
             // var activityId = document.getElementById("activityId").value;
-            var activityId = 8
+            var activityId = getQueryVariable("id")
             var staffId = document.getElementById("staffId").value;
             var myData = {
                 "activityId": activityId,
