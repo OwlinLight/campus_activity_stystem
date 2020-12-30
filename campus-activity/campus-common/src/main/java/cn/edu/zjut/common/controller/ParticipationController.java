@@ -76,10 +76,7 @@ public class ParticipationController {
             @RequestParam(value = "activityId") @ApiParam("活动id") Long activityId) {
         try {
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
-            //baseUrl要修改为填写签到表单的url,并且activityId需要传过去
-//            String baseUrl = "http://10.87.238.84:8080/activity/enroll?";
-//            String url = baseUrl + "?activity_id=" + activityId;
-            String url = "http://192.168.31.226/enroll.jsp?id="+activityId;
+            String url = "http://192.168.31.226/enroll.jsp?id=" + activityId;
             System.out.println(url);
             BitMatrix bitMatrix = qrCodeWriter.encode(url, BarcodeFormat.QR_CODE, 600, 600);
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -106,17 +103,9 @@ public class ParticipationController {
     @ApiOperation("导出活动参加情况为Excel")
     @GetMapping("/activity/export/{activityId}")
     @ResponseBody
-    public CommonResult<String> exportData(@PathVariable("activityId") Long activityId) {
+    public ResponseEntity<byte[]> exportData(@PathVariable("activityId") Long activityId) {
         List<Participation> participationList = (List<Participation>) participationService.listAllParticipation(activityId);
-        ResponseEntity<byte[]> responseEntity = POIUtils.employee2Excel(participationList);
-        Base64.Encoder encoder = Base64.getEncoder();
-        //这边网上没有查到，responseEntity.getBody()是我自己写的，也不知道对不对，返回的data好像是对的
-        String excelText = encoder.encodeToString(responseEntity.getBody());
-        return CommonResult.success(excelText);
+        return POIUtils.employee2Excel(participationList);
     }
-//    public ResponseEntity<byte[]> exportData(@PathVariable("activityId") Long activityId) {
-//        List<Participation> participationList = (List<Participation>) participationService.listAllParticipation(activityId);
-//        return POIUtils.employee2Excel(participationList);
-//    }
 
 }
