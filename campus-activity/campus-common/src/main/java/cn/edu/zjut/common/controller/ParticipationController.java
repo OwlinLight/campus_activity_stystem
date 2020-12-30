@@ -38,7 +38,7 @@ public class ParticipationController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ActivityController.class);
 
     @ApiOperation("活动报名")
-    @RequestMapping(value = "/activity/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/activity/register", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<String> registerActivity(
             @RequestParam(value = "staffId") @ApiParam("学号/工号") Long staffId,
