@@ -20,7 +20,8 @@
 
 
     <!--=================== 数据源，事务控制 ================-->
-    <context:property-placeholder location="classpath:dbconfig.properties"/>
+    <!--    <context:property-placeholder>标签在Spring配置文件中只能存在一份 -->
+    <context:property-placeholder location="classpath:dbconfig.properties,classpath:redis.properties"/>
     <bean id="pooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
         <property name="driverClass" value="${jdbc.driverClass}"></property>
@@ -37,7 +38,6 @@
         <property name="mapperLocations" value="classpath:dao/*.xml"></property>
     </bean>
 
-
     <!-- 配置扫描器，将mybatis接口的实现加入到ioc容器中 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--扫描所有dao接口的实现，加入到ioc容器中 -->
@@ -45,17 +45,12 @@
     </bean>
 
     <!-- name="executorType" value="SIMPLE"
-     解决 mybatis 更新时，虽然数据更新成功了，但是返回值是负数（-2147482646）-->
+     解决 mybatis 更新时，虽然数据更新成功了，但是返回值是负数（-2147482646）
+     当value="BATCH"时，返回负数-->
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
         <constructor-arg name="executorType" value="SIMPLE"></constructor-arg>
     </bean>
-
-    <!-- 配置一个可以执行批量的sqlSession -->
-    <!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
-         <constructor-arg name="executorType" value="BATCH"></constructor-arg>
-     </bean>-->
 
     <!-- ===============事务控制的配置 ================-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -87,4 +82,41 @@
     不过即使proxy-target-class设置为false，如果目标类没有声明接口，则spring将自动使用CGLib动态代理。
     -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!--================== 配置和Redis的整合=============== -->
+    <!--设置数据池-->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"></property>
+        <property name="minIdle" value="${redis.minIdle}"></property>
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}"></property>
+        <property name="maxTotal" value="${redis.maxTotal}"></property>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"></property>
+    </bean>
+    <!--连接redis-->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}"></property>
+        <property name="port" value="${redis.port}"></property>
+        <property name="password" value="${redis.password}"></property>
+        <property name="database" value="${redis.datebase}"/>
+        <property name="poolConfig" ref="poolConfig"></property>
+    </bean>
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <!--序列化方式 建议key/hashKey采用StringRedisSerializer-->
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <!-- 开启redis事务支持 -->
+        <!-- 刚开始写的是true，会报空指针异常 -->
+        <property name="enableTransactionSupport" value="false"/>
+    </bean>
 </beans>

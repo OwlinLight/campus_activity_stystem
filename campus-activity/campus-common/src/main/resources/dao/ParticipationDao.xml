@@ -11,6 +11,7 @@
         <result column="user.name" jdbcType="VARCHAR" property="staffName"/>
         <result column="college.name" jdbcType="VARCHAR" property="collegeName"/>
         <result column="class" jdbcType="VARCHAR" property="className"/>
+        <result column="name" jdbcType="VARCHAR" property="activityName"/>
     </resultMap>
     <insert id="registerActivity" parameterType="Participation">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -33,11 +34,12 @@
     </update>
     <select id="listParticipation" parameterType="Long" resultMap="ParticipationMap">
         select participation.staff_id,register_time,enroll_time,quit_time,
-        user.name as staffName,college.name as collegeName,class
-        from participation,user,college
+        user.name as staffName,college.name as collegeName,class,name as activityName
+        from participation,user,college,activity
         where participation.activity_id=#{activityId,jdbcType=INTEGER}
         and participation.staff_id=user.staff_id
         and user.college_id=college.id
+        and participation.activity_id=activity.id
     </select>
     <select id="findParticipation" parameterType="cn.edu.zjut.common.domain.Participation" resultType="INTEGER">
         select count(*) from participation where staff_id = #{staffId} and activity_id = #{activityId}

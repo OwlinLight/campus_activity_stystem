@@ -15,4 +15,5 @@ public interface ParticipationService {
     List<Participation> listParticipation(Integer pageNum, Integer pageSize, Long activityId);
 
     List<Participation> listAllParticipation(Long activityId);
+
 }

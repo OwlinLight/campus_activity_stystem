@@ -12,12 +12,17 @@ public class UserServiceImpl implements UserService {
     private UserDao userdao;
 
     @Override
-    public User loginUser(String staff_id, String password) {
-        return userdao.loginUser(staff_id, password);
+    public User loginUser(Long staffId, String password) {
+        return userdao.loginUser(staffId, password);
     }
 
     @Override
     public int createUser(User user) {
         return userdao.createUser(user);
+    }
+
+    @Override
+    public User getUser(Long staffId) {
+        return userdao.getUser(staffId);
     }
 }

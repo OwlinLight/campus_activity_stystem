@@ -8,12 +8,13 @@ import java.io.Serializable;
 
 public class User implements Serializable{
     private Integer id;
-    private String staff_id;
+    private Long staffId;
     private String password;
     private String name;
     private String role;
     private Integer collage_id;
     private String user_class;
+    private String phone;
 
     public Integer getId() {
         return id;
@@ -23,12 +24,12 @@ public class User implements Serializable{
         this.id = id;
     }
 
-    public String getStaff_id() {
-        return staff_id;
+    public Long getStaffId() {
+        return staffId;
     }
 
-    public void setStaff_id(String staff_id) {
-        this.staff_id = staff_id;
+    public void setStaffId(Long staffId) {
+        this.staffId = staffId;
     }
 
     public String getPassword() {
@@ -69,5 +70,13 @@ public class User implements Serializable{
 
     public void setUser_class(String user_class) {
         this.user_class = user_class;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

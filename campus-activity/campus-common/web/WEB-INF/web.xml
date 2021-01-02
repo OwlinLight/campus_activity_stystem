@@ -16,6 +16,11 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <!--防止spring内存溢出 -->
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+
     <!--2、SpringMvc的前端控制器，拦截所有请求  -->
     <!-- The front controller of this Spring Web application, responsible for handling all application requests -->
     <servlet>
