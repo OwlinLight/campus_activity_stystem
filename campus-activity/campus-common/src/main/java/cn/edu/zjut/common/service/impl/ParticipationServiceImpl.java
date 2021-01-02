@@ -33,6 +33,11 @@ public class ParticipationServiceImpl implements ParticipationService {
         participation.setStaffId(staffId);
         participation.setActivityId(activityId);
         participation.setRegisterTime(registerTime);
+        int flag = participationDao.findParticipation(participation);
+        System.out.println(flag);
+        if(flag >= 1){
+            return 0;
+        }
         System.out.println(participation.getRegisterTime());
         return participationDao.registerActivity(participation);
     }
