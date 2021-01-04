@@ -4,7 +4,7 @@ import cn.edu.zjut.common.domain.User;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserDao {
-    User loginUser(@Param("staff_id") Long staffId, @Param("password") String password);
+    User loginUser(@Param("staffId") Long staffId, @Param("password") String password);
 
     int createUser(User user);
 
