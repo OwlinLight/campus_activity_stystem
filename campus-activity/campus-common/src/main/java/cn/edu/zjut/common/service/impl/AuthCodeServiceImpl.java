@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Random;
 
 import static cn.edu.zjut.common.api.CommonResult.success;
@@ -35,9 +34,10 @@ public class AuthCodeServiceImpl implements AuthCodeService {
         for (int i = 0; i < 6; i++) {
             sb.append(random.nextInt(10));
         }
-        HashMap<String, Object> templateParam = new HashMap<>();
-        templateParam.put("code", sb.toString());
-        boolean isSend = sendSmsService.sendSms(telephone, "SMS_208580448", templateParam);
+        String[] phoneNumberSet1 = {"+86" + telephone};
+        String[] templateParamSet1 = {sb.toString(), "5"};
+        String templateID = "832776";
+        boolean isSend = sendSmsService.sendSms(phoneNumberSet1, templateParamSet1, templateID);
         if (isSend) {
             redisService.set(REDIS_KEY_PREFIX_AUTH_CODE + telephone, sb.toString());
             redisService.expire(REDIS_KEY_PREFIX_AUTH_CODE + telephone, AUTH_CODE_EXPIRE_SECONDS);

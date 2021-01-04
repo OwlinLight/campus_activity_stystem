@@ -25,7 +25,7 @@ public class UserController {
     @ApiOperation("用户登录")
     @RequestMapping(value = "/activity/LoginUser", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<User> loginUser(@RequestParam(value = "userName") String staff_id, @RequestParam(value = "password") String password) {
+    public CommonResult<User> loginUser(@RequestParam(value = "userName") Long staff_id, @RequestParam(value = "password") String password) {
         CommonResult commonResult;
         User user = (User) userserver.loginUser(staff_id, password);
         if (user == null) {

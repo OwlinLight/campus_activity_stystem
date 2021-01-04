@@ -2,7 +2,6 @@ package cn.edu.zjut.common.service;
 
 import cn.edu.zjut.common.api.CommonResult;
 
-import java.util.Map;
 
 /**
  * 验证码管理Service

@@ -5,7 +5,7 @@
 <mapper namespace="cn.edu.zjut.common.dao.UserDao">
     <resultMap id="UserMap" type="User">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="staff_id" jdbcType="Long" property="staffId"/>
+        <result column="staff_id" jdbcType="INTEGER" property="staffId"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="role" jdbcType="VARCHAR" property="role"/>
@@ -22,7 +22,7 @@
     <insert id="createUser" parameterType="cn.edu.zjut.common.domain.User">
         <!-- selectKey获取新增的主键 -->
         insert into user (id,staff_id,password,name,role,college_id,class) values
-        (#{id,jdbcType=INTEGER},#{staffId,jdbcType=Long},#{password,jdbcType=VARCHAR},
+        (#{id,jdbcType=INTEGER},#{staffId,jdbcType=INTEGER},#{password,jdbcType=VARCHAR},
         #{name,jdbcType=VARCHAR},#{role, jdbcType=VARCHAR},#{collage_id,jdbcType=INTEGER},#{user_class,jdbcType=VARCHAR})
     </insert>
     <select id="getUser" parameterType="Long" resultMap="UserMap">

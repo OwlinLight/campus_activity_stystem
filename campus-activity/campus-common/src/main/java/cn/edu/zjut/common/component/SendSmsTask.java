@@ -12,7 +12,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,7 +32,7 @@ public class SendSmsTask {
      * cron表达式：Seconds Minutes Hours DayofMonth Month DayofWeek [Year]
      * "0 15 10 ? * *" 每天上午10:15触发
      */
-    @Scheduled(cron = "0 15 10 ? * *")
+    @Scheduled(cron = "0 15 22 ? * *")
     private void sendSmsOrder() {
         Date currentTime = DateUtil.date();
         List<Showac> showacs = activityService.listAllActivity();
@@ -54,10 +53,10 @@ public class SendSmsTask {
                     for (Participation participation : participations) {
                         Long staffId = participation.getStaffId();
                         String phone = userService.getUser(staffId).getPhone();
-                        HashMap<String, Object> templateParam = new HashMap<>();
-                        templateParam.put("activityname", participation.getActivityName());
-                        templateParam.put("starttime", participation.getStartTime());
-                        sendSmsService.sendSms(phone, "SMS_208635558", templateParam);
+                        String[] phoneNumberSet1 = {phone};
+                        String[] templateParamSet1 = {participation.getActivityName(), String.valueOf(participation.getStartTime())};
+                        String templateID = "832779";
+                        sendSmsService.sendSms(phoneNumberSet1, templateParamSet1, templateID);
                     }
                 }
             }

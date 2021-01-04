@@ -1,11 +1,10 @@
 package cn.edu.zjut.common.service;
 
-import java.util.Map;
 
 /**
- * 阿里云短信服务
+ * 腾讯云短信服务
  * Created by iris on 2020/12/31.
  */
 public interface SendSmsService {
-    boolean sendSms(String telephone, String templateCode, Map<String, Object> templateParam);
+    public boolean sendSms(String[] phoneNumberSet1, String[] templateParamSet1, String templateID);
 }
