@@ -22,14 +22,14 @@ public class AuthCodeController {
     private AuthCodeService authCodeService;
 
     @ApiOperation("获取验证码")
-    @RequestMapping(value = "/getAuthCode", method = RequestMethod.GET)
+    @RequestMapping(value = "/activity/getAuthCode", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult getAuthCode(@RequestParam String telephone) {
         return authCodeService.generateAuthCode(telephone);
     }
 
     @ApiOperation("判断验证码是否正确")
-    @RequestMapping(value = "/verifyAuthCode", method = RequestMethod.POST)
+    @RequestMapping(value = "/activity/verifyAuthCode", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult updatePassword(@RequestParam String telephone,
                                        @RequestParam String authCode) {

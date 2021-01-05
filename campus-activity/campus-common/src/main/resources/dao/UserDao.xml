@@ -13,7 +13,7 @@
         <result column="class" jdbcType="VARCHAR" property="user_class"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
     </resultMap>
-    <sql id="User1">id, staff_id,password, name, role, college_id, class</sql>
+    <sql id="User1">id, staff_id,password, name, role, college_id, class, phone</sql>
     <select id="loginUser" resultMap="UserMap">
         select
         <include refid="User1"/>
@@ -21,9 +21,10 @@
     </select>
     <insert id="createUser" parameterType="cn.edu.zjut.common.domain.User">
         <!-- selectKey获取新增的主键 -->
-        insert into user (id,staff_id,password,name,role,college_id,class) values
+        insert into user (id,staff_id,password,name,role,college_id,class,phone) values
         (#{id,jdbcType=INTEGER},#{staffId,jdbcType=INTEGER},#{password,jdbcType=VARCHAR},
-        #{name,jdbcType=VARCHAR},#{role, jdbcType=VARCHAR},#{collage_id,jdbcType=INTEGER},#{user_class,jdbcType=VARCHAR})
+        #{name,jdbcType=VARCHAR},#{role, jdbcType=VARCHAR},#{collage_id,jdbcType=INTEGER},#{user_class,jdbcType=VARCHAR}
+        ,#{phone,jdbcType=VARCHAR})
     </insert>
     <select id="getUser" parameterType="Long" resultMap="UserMap">
         select
