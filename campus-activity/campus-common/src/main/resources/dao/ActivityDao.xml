@@ -19,51 +19,30 @@
         <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
         <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
         <result column="college.name" jdbcType="VARCHAR" property="collegeName"/>
-        <result column="auditor.name" jdbcType="VARCHAR" property="directorName"/>
+        <result column="user.name" jdbcType="VARCHAR" property="directorName"/>
     </resultMap>
     <sql id="Activity_List">
         activity.id,activity.name,start_time,end_time, college_id,position_id,director_id,status_id
     </sql>
 <!--    关键字查找的select-->
     <sql id="Activity_List2">
-        activity.id,activity.name,activity.start_time,activity.end_time, college.name,auditor.name
+        activity.id,activity.name,activity.start_time,activity.end_time, college.name,user.name
     </sql>
     <select id="listActivityPassed" resultMap="ShowacMap">
         select t1.id,t1.name as activityName,t1.start_time,t1.end_time, t2.name as collegeName,t3.name as directorName
-        from activity t1, college t2, auditor t3, status t4
+        from activity t1, college t2, user t3, status t4
         where t1.status_id = t4.id and result = 'pass' and  t1.college_id = t2.id and t1.director_id = t3.id
     </select>
     <select id="listActivityFailed" resultMap="ShowacMap">
         select t1.id,t1.name as activityName,t1.start_time,t1.end_time, t2.name as collegeName,t3.name as directorName
-        from activity t1, college t2, auditor t3, status t4
+        from activity t1, college t2, user t3, status t4
         where t1.status_id = t4.id and result = 'fail' and  t1.college_id = t2.id and t1.director_id = t3.id
     </select>
-    <!--    通过关键词查找-->
-<!--    <select id="askBykeywords" parameterType="cn.edu.zjut.common.domain.Keywords" resultMap="ActivityMap">-->
-<!--        select t1.*-->
-<!--        from activity t1, college t2, auditor t3-->
-<!--        where t1.college_id = t2.id and t1.director_id = t3.id-->
-<!--        <if test="activityName != null">-->
-<!--            and POSITION(#{activityName} IN t1.name)-->
-<!--        </if>-->
-<!--        <if test="collegeName != null">-->
-<!--            and t2.name = #{collegeName}-->
-<!--        </if>-->
-<!--        <if test="directorName != null">-->
-<!--            and t3.name = #{directorName}-->
-<!--        </if>-->
-<!--        <if test="startTime != null">-->
-<!--            and unix_timestamp(t1.start_time) > unix_timestamp(#{startTime, jdbcType=TIMESTAMP})-->
-<!--        </if>-->
-<!--        <if test="endTime != null">-->
-<!--            and unix_timestamp(t1.end_time) &lt; unix_timestamp(#{endTime, jdbcType=TIMESTAMP})-->
-<!--        </if>-->
-<!--    </select>-->
 
     <!--    通过关键词查找2-->
     <select id="askBykeywords" parameterType="cn.edu.zjut.common.domain.Keywords" resultMap="ShowacMap">
         select t1.id,t1.name as activityName,t1.start_time,t1.end_time, t2.name as collegeName,t3.name as directorName
-        from activity t1, college t2, auditor t3, status t4
+        from activity t1, college t2, user t3, status t4
         where t1.college_id = t2.id and t1.director_id = t3.id and t4.result = #{status} and t4.id = t1.status_id
         <if test="activityName != null">
             and POSITION(#{activityName} IN t1.name)
