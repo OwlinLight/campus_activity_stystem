@@ -32,4 +32,9 @@
         from user
         where staff_id=#{staffId}
     </select>
+<!--    通过姓名查找id-->
+    <select id="askIdByName" parameterType="String" resultType="Long">
+        select id from user where name=#{userName} limit 1
+    </select>
 </mapper>
+

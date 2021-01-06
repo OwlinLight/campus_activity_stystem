@@ -12,4 +12,6 @@ public interface UserService {
      */
     User getUser(Long staffId);
 
+    Long askIdByName(String userName);
+
 }

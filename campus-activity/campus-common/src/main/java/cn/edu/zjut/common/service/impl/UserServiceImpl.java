@@ -25,4 +25,18 @@ public class UserServiceImpl implements UserService {
     public User getUser(Long staffId) {
         return userdao.getUser(staffId);
     }
+
+    @Override
+    public Long askIdByName(String userName) {
+
+//        return userdao.askIdByName("徐伟峰") == null ? (long)-1 : (long)1;
+//        return (long) 6;
+        return userdao.askIdByName(userName);
+
+    }
+
+    public static void main(String[] argv) {
+        UserServiceImpl ustest = new UserServiceImpl();
+//        System.out.println(ustest.askIdByName("徐伟峰"));
+    }
 }

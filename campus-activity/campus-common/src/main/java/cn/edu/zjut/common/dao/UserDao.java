@@ -10,4 +10,6 @@ public interface UserDao {
 
     User getUser(Long staffId);
 
+    Long askIdByName(String userName);
+
 }

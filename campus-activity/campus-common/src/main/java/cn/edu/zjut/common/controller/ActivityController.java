@@ -7,6 +7,7 @@ import cn.edu.zjut.common.domain.Keywords;
 import cn.edu.zjut.common.domain.Showac;
 import cn.edu.zjut.common.domain.Status;
 import cn.edu.zjut.common.service.ActivityService;
+import cn.edu.zjut.common.service.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,6 +31,9 @@ import java.util.List;
 public class ActivityController {
     @Autowired
     private ActivityService activityService;
+
+    @Autowired
+    private UserService userService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ActivityController.class);
 
@@ -95,6 +99,25 @@ public class ActivityController {
             @RequestBody Keywords keywords) {
         List<Showac> activityList = activityService.askBykeywords(pageNum, pageSize, keywords);
         return CommonResult.success(CommonPage.restPage(activityList));
+    }
+
+    @ApiOperation("修改活动的负责人")
+    @RequestMapping(value = "/activity/updateActivityDirector", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateActivityDirector(
+            @RequestParam(value = "activityId") @ApiParam("活动的Id") Long activityId,
+            @RequestParam(value = "directorName") @ApiParam("负责人的姓名") String directorName) {
+        CommonResult commonResult;
+        Long directorId = userService.askIdByName(directorName);
+        Activity activity = activityService.getActivity(activityId);
+        activity.setDirector_id(directorId);
+        int flag = activityService.updateActivity(activityId, activity);
+        if (flag == 1) {
+            commonResult = CommonResult.success("更新成功");
+        } else {
+            commonResult = CommonResult.failed("操作失败");
+        }
+        return commonResult;
     }
 
     @ApiOperation("更新活动")
