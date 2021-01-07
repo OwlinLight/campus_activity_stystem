@@ -71,7 +71,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Showac> getDirectorActivity(Long userId) {
-        return activityDao.getDirectorActivity(userId);
+    public List<Showac> getDirectorActivity(Long staffID) {
+        return activityDao.getDirectorActivity(staffID);
     }
 }

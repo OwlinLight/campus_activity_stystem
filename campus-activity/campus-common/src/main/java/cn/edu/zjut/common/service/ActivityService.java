@@ -27,5 +27,5 @@ public interface ActivityService {
 
     List<Showac> askBykeywords(int pageNum, int pageSize, Keywords keywords);
 
-    List<Showac> getDirectorActivity(Long userId);
+    List<Showac> getDirectorActivity(Long StaffID);
 }

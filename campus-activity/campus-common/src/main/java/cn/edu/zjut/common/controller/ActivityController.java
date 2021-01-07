@@ -186,10 +186,10 @@ public class ActivityController {
     }
 
     @ApiOperation("获取指定举办人的活动")
-    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/activity/director", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<List<Showac>> getDirectorActivity(@PathVariable("userId") Long userId) {
-        return CommonResult.success(activityService.getDirectorActivity(userId));
+    public CommonResult<List<Showac>> getDirectorActivity(@RequestParam(value = "staffID") Long staffID) {
+        return CommonResult.success(activityService.getDirectorActivity(staffID));
     }
 
 }

@@ -80,7 +80,7 @@
         <include refid="Showac_List"/>
         FROM activity t1, college t2, user t3, status t4
         WHERE t1.college_id = t2.id AND t1.director_id = t3.id AND t1.status_id = t4.id
-        AND t1.director_id = #{userId}
+        AND t3.staff_id = #{staffID}
     </select>
 
     <insert id="createActivity" parameterType="cn.edu.zjut.common.domain.Activity">
