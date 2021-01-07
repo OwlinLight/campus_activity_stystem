@@ -12,6 +12,9 @@ public interface ActivityInfoDao {
 
     ActivityInfo getActivityInfo(Long id);
 
-    int updatePeopleLimit(@Param("id")Long id, @Param("limit")int limit);
+    int updatePeopleLimit(@Param("id") Long id, @Param("limit") int limit);
 
+    int updatePeopleRegister(@Param("activityId")Long activityId,@Param("peopleRegister") int peopleRegister);
+
+    int updateActivityInfoPeople(ActivityInfo activityInfo);
 }

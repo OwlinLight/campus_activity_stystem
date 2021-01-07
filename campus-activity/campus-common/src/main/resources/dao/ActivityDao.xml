@@ -99,10 +99,10 @@
         <if test="name != null">
             name = #{name}
         </if>
-        <if test="id != null">
+        <if test="startTime != null">
             ,start_time = #{startTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="id != null">
+        <if test="endTime != null">
             ,end_time = #{endTime,jdbcType=TIMESTAMP}
         </if>
         <if test="college_id != null">

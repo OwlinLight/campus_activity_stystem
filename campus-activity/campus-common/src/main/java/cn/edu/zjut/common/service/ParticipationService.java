@@ -12,6 +12,8 @@ public interface ParticipationService {
 
     boolean enrollActivity(Participation participation);
 
+    boolean quitActivity(Participation participation);
+
     List<Participation> listParticipation(Integer pageNum, Integer pageSize, Long activityId);
 
     List<Participation> listAllParticipation(Long activityId);

@@ -69,6 +69,22 @@ public class ParticipationController {
         return commonResult;
     }
 
+    @ApiOperation("活动签退")
+    @RequestMapping(value = "/activity/quit", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult<String> quitActivity(
+            @RequestBody Participation participation) {
+        CommonResult commonResult;
+        System.out.println(participation);
+        boolean enrollResult = participationService.quitActivity(participation);
+        if (enrollResult) {
+            commonResult = CommonResult.success("签退成功");
+        } else {
+            commonResult = CommonResult.failed("签退失败");
+        }
+        return commonResult;
+    }
+
     @ApiOperation("生成签到二维码")
     @RequestMapping(value = "/activity/qrcode", method = RequestMethod.GET)
     @ResponseBody

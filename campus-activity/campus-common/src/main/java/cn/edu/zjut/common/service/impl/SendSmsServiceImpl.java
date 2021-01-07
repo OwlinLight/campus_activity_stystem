@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 /**
- * 腾讯短信服务实现类
+ * 腾讯云短信服务实现类
  * Created by iris on 2020/12/31.
  */
 @Service
