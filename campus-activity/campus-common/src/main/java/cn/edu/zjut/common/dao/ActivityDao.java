@@ -13,7 +13,7 @@ import java.util.List;
 public interface ActivityDao {
     List<Showac> listActivityPassed();
 
-    List<Showac> listActivityFailed();
+    List<Showac> listActivityPending();
 
     int createActivity(Activity activity);
 

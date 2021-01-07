@@ -21,11 +21,11 @@ public interface ActivityService {
 
     List<Showac> listActivityPassed(int pageNum, int pageSize);
 
-    List<Showac> listActivityFailed(int pageNum, int pageSize);
+    List<Showac> listActivityPending(int pageNum, int pageSize);
 
     Activity getActivity(Long id);
 
     List<Showac> askBykeywords(int pageNum, int pageSize, Keywords keywords);
 
-    List<Showac> getDirectorActivity(Long StaffID);
+    List<Showac> getDirectorActivity(Long StaffID,int pageNum, int pageSize);
 }

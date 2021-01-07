@@ -170,7 +170,7 @@ public class ActivityController {
     public CommonResult<CommonPage<Showac>> listActivityFailed(
             @RequestParam(value = "pageNum", defaultValue = "1") @ApiParam("页码") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "5") @ApiParam("每页数量") Integer pageSize) {
-        List<Showac> activityList = activityService.listActivityFailed(pageNum, pageSize);
+        List<Showac> activityList = activityService.listActivityPending(pageNum, pageSize);
         return CommonResult.success(CommonPage.restPage(activityList));
     }
 
@@ -188,8 +188,12 @@ public class ActivityController {
     @ApiOperation("获取指定举办人的活动")
     @RequestMapping(value = "/activity/director", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<List<Showac>> getDirectorActivity(@RequestParam(value = "staffID") Long staffID) {
-        return CommonResult.success(activityService.getDirectorActivity(staffID));
+    public CommonResult<CommonPage<Showac>> getDirectorActivity(
+            @RequestParam(value = "staffID") Long staffID,
+            @RequestParam(value = "pageNum", defaultValue = "1") @ApiParam("页码") Integer pageNum,
+            @RequestParam(value = "pageSize", defaultValue = "5") @ApiParam("每页数量") Integer pageSize) {
+        List<Showac> activityList = activityService.getDirectorActivity(staffID, pageNum, pageSize);
+        return CommonResult.success(CommonPage.restPage(activityList));
     }
 
 }

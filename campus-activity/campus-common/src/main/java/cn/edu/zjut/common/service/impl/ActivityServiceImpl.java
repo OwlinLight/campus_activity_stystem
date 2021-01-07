@@ -54,9 +54,9 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Showac> listActivityFailed(int pageNum, int pageSize) {
+    public List<Showac> listActivityPending(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        return activityDao.listActivityFailed();
+        return activityDao.listActivityPending();
     }
 
     @Override
@@ -71,7 +71,8 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Showac> getDirectorActivity(Long staffID) {
+    public List<Showac> getDirectorActivity(Long staffID,int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return activityDao.getDirectorActivity(staffID);
     }
 }
