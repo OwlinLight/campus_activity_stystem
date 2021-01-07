@@ -17,4 +17,6 @@ public interface ActivityInfoDao {
     int updatePeopleRegister(@Param("activityId")Long activityId,@Param("peopleRegister") int peopleRegister);
 
     int updateActivityInfoPeople(ActivityInfo activityInfo);
+
+    int createActivityInfo(ActivityInfo activityInfo);
 }

@@ -56,4 +56,14 @@
         </if>
         WHERE activity_id = ${id}
     </update>
+    <!--    新建-->
+    <insert id="createActivityInfo" parameterType="cn.edu.zjut.common.domain.ActivityInfo">
+        <!-- selectKey获取新增的主键 -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into activity_info (activity_id, people_limit,activity_img,activity_intro) values
+        (#{activityId, jdbcType=VARCHAR},#{people_limit, jdbcType=INTEGER},
+        #{activity_img, jdbcType=VARCHAR},#{activity_intro, jdbcType=VARCHAR})
+    </insert>
 </mapper>

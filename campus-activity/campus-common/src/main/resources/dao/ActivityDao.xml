@@ -22,15 +22,15 @@
         <result column="user.name" jdbcType="VARCHAR" property="directorName"/>
         <result column="status.name" jdbcType="VARCHAR" property="status"/>
     </resultMap>
-<!--TODO: 解决报错问题-https://mybatis.org/mybatis-3/sqlmap-xml.html-->
+    <!--TODO: 解决报错问题-https://mybatis.org/mybatis-3/sqlmap-xml.html-->
     <sql id="Activity_List">
         activity.id,activity.name,start_time,end_time, college_id,position_id,director_id,status_id
     </sql>
-<!--    关键字查找的select-->
+    <!--    关键字查找的select-->
     <sql id="Activity_List2">
         activity.id,activity.name,activity.start_time,activity.end_time, college.name,user.name
     </sql>
-<!--showac内容-->
+    <!--showac内容-->
     <sql id="Showac_List">
         t1.id,t1.name as activityName,t1.start_time,t1.end_time, t2.name as collegeName,t3.name as directorName, t4.result as status
     </sql>
@@ -68,13 +68,17 @@
             and unix_timestamp(t1.end_time) &lt; unix_timestamp(#{endTime, jdbcType=TIMESTAMP})
         </if>
     </select>
+    <!--    根据activityId返回activity表中的Id-->
+    <select id="getLastId" resultType="Long">
+        select MAX(id) from activity
+    </select>
     <select id="getActivity" resultMap="ActivityMap">
         select
         <include refid="Activity_List"/>
         from activity
         where id=#{id}
     </select>
-<!--获取举办人所有活动列表-->
+    <!--获取举办人所有活动列表-->
     <select id="getDirectorActivity" resultMap="ShowacMap">
         SELECT
         <include refid="Showac_List"/>
@@ -88,10 +92,10 @@
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into activity (name, start_time, end_time,college_id,position_id, director_id, status_id) values
+        insert into activity (name, start_time, end_time,college_id, director_id, status_id) values
         (#{name,jdbcType=VARCHAR},
         #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{college_id,jdbcType=INTEGER},
-        #{position_id,jdbcType=INTEGER}, #{director_id,jdbcType=INTEGER}, #{status_id,jdbcType=INTEGER})
+        #{director_id,jdbcType=INTEGER}, #{status_id,jdbcType=INTEGER})
     </insert>
     <update id="updateActivity" parameterType="Long">
         update activity

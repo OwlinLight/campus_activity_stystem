@@ -10,8 +10,8 @@ import java.util.Date;
 
 public class Status {
     private int id;
-    private int activity_id;
-    private int auditor_id;
+    private Long activity_id;
+    private Long auditor_id;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date apply_time;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
@@ -26,19 +26,19 @@ public class Status {
         this.id = id;
     }
 
-    public int getActivity_id() {
+    public Long getActivity_id() {
         return activity_id;
     }
 
-    public void setActivity_id(int activity_id) {
+    public void setActivity_id(Long activity_id) {
         this.activity_id = activity_id;
     }
 
-    public int getAuditor_id() {
+    public Long getAuditor_id() {
         return auditor_id;
     }
 
-    public void setAuditor_id(int auditor_id) {
+    public void setAuditor_id(Long auditor_id) {
         this.auditor_id = auditor_id;
     }
 

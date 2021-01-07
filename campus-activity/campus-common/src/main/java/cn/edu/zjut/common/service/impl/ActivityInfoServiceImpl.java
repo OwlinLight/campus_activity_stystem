@@ -32,4 +32,9 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
     public int updatePeopleLimit(Long id, int limit) {
         return activityInfoDao.updatePeopleLimit(id, limit);
     }
+
+    @Override
+    public int createActivityInfo(ActivityInfo activityInfo) {
+        return activityInfoDao.createActivityInfo(activityInfo);
+    }
 }

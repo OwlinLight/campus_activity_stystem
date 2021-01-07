@@ -13,4 +13,6 @@ public interface ActivityInfoService {
 
     int updatePeopleLimit(Long id, int limit);
 
+    int createActivityInfo(ActivityInfo activityInfo);
+
 }

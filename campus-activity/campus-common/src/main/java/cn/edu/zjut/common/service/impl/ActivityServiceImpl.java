@@ -71,8 +71,13 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Showac> getDirectorActivity(Long staffID,int pageNum, int pageSize) {
+    public List<Showac> getDirectorActivity(Long staffID, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         return activityDao.getDirectorActivity(staffID);
+    }
+
+    @Override
+    public Long getLastId() {
+        return activityDao.getLastId();
     }
 }

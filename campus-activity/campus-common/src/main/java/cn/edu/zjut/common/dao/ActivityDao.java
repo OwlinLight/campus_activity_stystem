@@ -29,4 +29,6 @@ public interface ActivityDao {
 
     List<Showac> getDirectorActivity(Long staffID);
 
+    Long getLastId();
+
 }

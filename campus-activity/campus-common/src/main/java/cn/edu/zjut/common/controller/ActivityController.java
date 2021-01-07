@@ -3,9 +3,7 @@ package cn.edu.zjut.common.controller;
 import cn.edu.zjut.common.api.CommonPage;
 import cn.edu.zjut.common.api.CommonResult;
 import cn.edu.zjut.common.domain.*;
-import cn.edu.zjut.common.service.ActivityService;
-import cn.edu.zjut.common.service.CollegeService;
-import cn.edu.zjut.common.service.UserService;
+import cn.edu.zjut.common.service.*;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -37,6 +35,12 @@ public class ActivityController {
     @Autowired
     private CollegeService collegeService;
 
+    @Autowired
+    private StatusService statusService;
+
+    @Autowired
+    private ActivityInfoService activityInfoService;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(ActivityController.class);
 
     @ApiOperation("获取所有活动列表")
@@ -49,17 +53,69 @@ public class ActivityController {
     @ApiOperation("添加活动")
     @RequestMapping(value = "/activity/create", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult createActivity(@RequestBody Activity activity) {
-        CommonResult commonResult;
-        int count = activityService.createActivity(activity);
-        if (count == 1) {
-            commonResult = CommonResult.success(activity);
-            LOGGER.debug("createActivity success:{}", activity);
-        } else {
-            commonResult = CommonResult.failed("操作失败");
-            LOGGER.debug("createActivity failed:{}", activity);
+    public CommonResult createActivity(@RequestBody Showac showac) {
+        try {
+            CommonResult commonResult;
+            int cnt1 = 0;
+            int cnt2 = 0;
+            int count = 0;
+            Activity activity = new Activity();
+            ActivityInfo activityInfo = new ActivityInfo();
+            Status status = new Status();
+
+//            Date currentTime = new Date();//申请时间
+//            SimpleDateFormat myfmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            Date currentTime_2 = myfmt.parse(myfmt.format(currentTime));
+//            System.out.println(myfmt.format(currentTime));
+
+
+            Long newActivityId = activityService.getLastId() + 1;
+            System.out.println("newac is " + newActivityId);
+            Long newStatusId = statusService.getLastId() + 1;
+            System.out.println("newst is " + newStatusId);
+
+            //初始化status
+            status.setActivity_id(newActivityId);
+            status.setAuditor_id(showac.getAuditor_id());
+//            status.setApply_time(currentTime);
+            status.setResult("pending");
+            cnt1 = statusService.createStatus(status);
+
+
+            //初始化activityInfo
+            activityInfo.setActivityId(newActivityId);
+            activityInfo.setPeople_limit(showac.getPeople_limit());
+            activityInfo.setActivity_img(showac.getActivity_img());
+            activityInfo.setActivity_intro(showac.getActivity_intro());
+            cnt2 = activityInfoService.createActivityInfo(activityInfo);
+
+
+            //初始化activity
+//        activity.setId(showac.getId());
+            activity.setName(showac.getActivityName());
+            activity.setStartTime(showac.getStartTime());
+            activity.setEndTime(showac.getEndTime());
+            activity.setCollege_id(collegeService.getCollegeId(showac.getCollegeName()));
+            activity.setDirector_id(showac.getAuditor_id());
+            activity.setStatus_id(newStatusId);
+            count = activityService.createActivity(activity);
+
+            System.out.println("cnt1 = " + cnt1 + " cnt2 = " + cnt2 + " count = " + count);
+            if (cnt1 == 1 && cnt2 == 1 && count == 1) {
+                System.out.println("Oh Shit!!!!!!!!!!!!");
+                commonResult = CommonResult.success(activity);
+                LOGGER.debug("createActivity success:{}", activity);
+            } else {
+
+                commonResult = CommonResult.failed("操作失败");
+                LOGGER.debug("createActivity failed:{}", activity);
+            }
+            return commonResult;
+        } catch (Exception e) {
+            CommonResult commonResult = CommonResult.failed("操作失败");
+            e.printStackTrace();
+            return commonResult;
         }
-        return commonResult;
     }
 
     @ApiOperation("删除指定id的活动")

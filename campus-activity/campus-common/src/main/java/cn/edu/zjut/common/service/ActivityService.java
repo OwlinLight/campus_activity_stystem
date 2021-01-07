@@ -28,4 +28,6 @@ public interface ActivityService {
     List<Showac> askBykeywords(int pageNum, int pageSize, Keywords keywords);
 
     List<Showac> getDirectorActivity(Long StaffID,int pageNum, int pageSize);
+
+    Long getLastId();
 }
