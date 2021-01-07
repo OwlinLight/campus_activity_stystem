@@ -10,6 +10,7 @@ import cn.edu.zjut.common.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.poi.hssf.record.NameCommentRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -182,6 +183,13 @@ public class ActivityController {
         } else {
             return CommonResult.failed();
         }
+    }
+
+    @ApiOperation("获取指定举办人的活动")
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<Showac>> getDirectorActivity(@PathVariable("userId") Long userId) {
+        return CommonResult.success(activityService.getDirectorActivity(userId));
     }
 
 }

@@ -69,4 +69,9 @@ public class ActivityServiceImpl implements ActivityService {
         PageHelper.startPage(pageNum, pageSize);
         return activityDao.askBykeywords(keywords);
     }
+
+    @Override
+    public List<Showac> getDirectorActivity(Long userId) {
+        return activityDao.getDirectorActivity(userId);
+    }
 }

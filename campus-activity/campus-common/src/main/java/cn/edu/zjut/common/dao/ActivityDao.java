@@ -27,5 +27,6 @@ public interface ActivityDao {
 
     List<Showac> askBykeywords(Keywords keywords);
 
+    List<Showac> getDirectorActivity(Long userId);
 
 }
