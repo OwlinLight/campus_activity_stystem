@@ -5,5 +5,8 @@ import cn.edu.zjut.common.domain.Comment;
 import java.util.List;
 
 public interface CommentService {
-    List<Comment> listActivityComment(long id);
+    List<Comment> listActivityComment(Long id);
+
+    int createComment(Comment comment);
+
 }

@@ -6,5 +6,7 @@ import cn.edu.zjut.common.domain.Showac;
 import java.util.List;
 
 public interface CommentDao {
-    List<Comment> listActivityComment(Long activity_id);
+    List<Comment> listActivityComment(Long activityId);
+
+    int createComment(Comment comment);
 }

@@ -1,6 +1,7 @@
 package cn.edu.zjut.common.controller;
 
 import cn.edu.zjut.common.api.CommonResult;
+import cn.edu.zjut.common.domain.Activity;
 import cn.edu.zjut.common.domain.ActivityInfo;
 import cn.edu.zjut.common.domain.Comment;
 import cn.edu.zjut.common.domain.Showac;
@@ -33,7 +34,30 @@ public class CommentController {
     @ApiOperation("获取所有评论列表")
     @RequestMapping(value = "/activity/comment/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<List<Comment>> getActivityList(long id) {
-        return CommonResult.success(commentService.listActivityComment(id));
+    public CommonResult<List<Comment>> getActivityList(@PathVariable("id") Long id) {
+        if (commentService.listActivityComment(id)!=null){
+            return CommonResult.success(commentService.listActivityComment(id));
+        }
+        else{
+            return CommonResult.failed();
+        }
+    }
+
+    @ApiOperation("添加评论")
+    @RequestMapping(value = "/activity/comment/create", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult createActivity(@RequestBody Comment comment) {
+        CommonResult commonResult;
+        int count = commentService.createComment(comment);
+        if (count == 1) {
+            commonResult = CommonResult.success(comment);
+            LOGGER.debug("createActivity success:{}", comment);
+        } else {
+            commonResult = CommonResult.failed("操作失败");
+            LOGGER.debug("createActivity failed:{}", comment);
+        }
+        return commonResult;
     }
 }
+
+

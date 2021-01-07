@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Comment {
     private long id;
-    private int user_id;
-    private int activity_id;
+    private int userId;
+    private int activityId;
     private int rate;
     private String description;
 }
