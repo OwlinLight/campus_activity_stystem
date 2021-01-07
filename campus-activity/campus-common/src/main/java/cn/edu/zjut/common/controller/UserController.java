@@ -2,6 +2,7 @@ package cn.edu.zjut.common.controller;
 
 
 import cn.edu.zjut.common.api.CommonResult;
+import cn.edu.zjut.common.domain.Activity;
 import cn.edu.zjut.common.domain.User;
 import cn.edu.zjut.common.service.UserService;
 
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import cn.edu.zjut.common.domain.Sha256;
+
+import java.util.List;
 
 
 @Api(
@@ -57,5 +60,14 @@ public class UserController {
         return commonResult;
     }
 
+    @ApiOperation("用户注册")
+    @RequestMapping(value = "/activity/getUserActivity", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult getUserActivity(@RequestParam(value = "staffId") Long staffId) {
+        CommonResult commonResult;
 
+        List<Activity> activity = userserver.getUserActivity(staffId);
+        commonResult = CommonResult.success(activity);
+        return commonResult;
+    }
 }

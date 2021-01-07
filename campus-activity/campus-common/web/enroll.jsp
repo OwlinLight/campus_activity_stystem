@@ -34,7 +34,7 @@
             var result ;
             $.ajax({
                 type: "POST",
-                url: "http://127.0.0.1/activity/enroll",
+                url: "http://192.168.31.226/activity/enroll",
                 data: JSON.stringify(myData),
                 contentType: "application/json;charset=UTF-8",
                 success:function (callback) {
@@ -59,7 +59,6 @@
             <tr>
                 <td colspan="2">
                     <input type="submit" name="提交" onclick="submit()">
-                    <input type="reset" name="重置">
             </tr>
         </table>
 </body>

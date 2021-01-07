@@ -1,6 +1,9 @@
 package cn.edu.zjut.common.service;
 
+import cn.edu.zjut.common.domain.Activity;
 import cn.edu.zjut.common.domain.User;
+
+import java.util.List;
 
 public interface UserService {
     User loginUser(Long staffId, String password);
@@ -14,4 +17,5 @@ public interface UserService {
 
     Long askIdByName(String userName);
 
+    List<Activity> getUserActivity(Long staffId);
 }

@@ -1,10 +1,13 @@
 package cn.edu.zjut.common.service.impl;
 
 import cn.edu.zjut.common.dao.UserDao;
+import cn.edu.zjut.common.domain.Activity;
 import cn.edu.zjut.common.domain.User;
 import cn.edu.zjut.common.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,6 +36,11 @@ public class UserServiceImpl implements UserService {
 //        return (long) 6;
         return userdao.askIdByName(userName);
 
+    }
+
+    @Override
+    public List<Activity> getUserActivity(Long staffId) {
+        return userdao.getUserActivity(staffId);
     }
 
     public static void main(String[] argv) {
