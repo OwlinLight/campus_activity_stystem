@@ -13,6 +13,16 @@
         <result column="class" jdbcType="VARCHAR" property="user_class"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
     </resultMap>
+    <resultMap id="ActivityMap" type="cn.edu.zjut.common.domain.Activity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="college_id" jdbcType="INTEGER" property="college_id"/>
+        <result column="position_id" jdbcType="INTEGER" property="director_id"/>
+        <result column="director_id" jdbcType="INTEGER" property="director_id"/>
+        <result column="status_id" jdbcType="INTEGER" property="status_id"/>
+    </resultMap>
     <sql id="User1">id, staff_id,password, name, role, college_id, class, phone</sql>
     <select id="loginUser" resultMap="UserMap">
         select
@@ -31,6 +41,10 @@
         <include refid="User1"/>
         from user
         where staff_id=#{staffId}
+    </select>
+    <select id="getUserActivity" parameterType="Long" resultMap="ActivityMap">
+        SELECT * FROM activity where(activity.id =
+                                     any(SELECT activity_id FROM participation WHERE participation.staff_id =#{staffId}))
     </select>
 <!--    通过姓名查找id-->
     <select id="askIdByName" parameterType="String" resultType="Long">
