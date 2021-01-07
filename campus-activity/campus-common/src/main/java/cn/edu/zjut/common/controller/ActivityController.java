@@ -2,11 +2,9 @@ package cn.edu.zjut.common.controller;
 
 import cn.edu.zjut.common.api.CommonPage;
 import cn.edu.zjut.common.api.CommonResult;
-import cn.edu.zjut.common.domain.Activity;
-import cn.edu.zjut.common.domain.Keywords;
-import cn.edu.zjut.common.domain.Showac;
-import cn.edu.zjut.common.domain.Status;
+import cn.edu.zjut.common.domain.*;
 import cn.edu.zjut.common.service.ActivityService;
+import cn.edu.zjut.common.service.CollegeService;
 import cn.edu.zjut.common.service.UserService;
 
 import io.swagger.annotations.Api;
@@ -34,6 +32,9 @@ public class ActivityController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CollegeService collegeService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ActivityController.class);
 
@@ -77,17 +78,34 @@ public class ActivityController {
     @ApiOperation("更新指定id的活动")
     @RequestMapping(value = "/activity/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult updateActivity(@PathVariable("id") Long id, @RequestBody Activity activity) {
-        CommonResult commonResult;
-        int count = activityService.updateActivity(id, activity);
-        if (count == 1) {
-            commonResult = CommonResult.success(activity);
-            LOGGER.debug("updateActivity success:{}", activity);
-        } else {
-            commonResult = CommonResult.failed("操作失败");
-            LOGGER.debug("updateActivity failed:{}", activity);
+    public CommonResult updateActivity(@PathVariable("id") Long id, @RequestBody Showac showac) {
+        CommonResult commonResult = CommonResult.success("1");
+        try {
+
+//        int count = activityService.updateActivity(id, activity);
+
+            Activity activity = activityService.getActivity(id);
+            Long directorId = userService.askIdByName(showac.getDirectorName());
+            Long collegeId = collegeService.getCollegeId(showac.getCollegeName());
+            System.out.println("更新指定id的活动  " + activity.toString() + directorId.toString() + collegeId.toString());
+            activity.setDirector_id(directorId);
+            activity.setCollege_id(collegeId);
+
+            int count = activityService.updateActivity(id, activity);
+
+            if (count == 1) {
+                commonResult = CommonResult.success(activity);
+                LOGGER.debug("updateActivity success:{}", activity);
+            } else {
+                commonResult = CommonResult.failed("操作失败");
+                LOGGER.debug("updateActivity failed:{}", activity);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return commonResult;
+
     }
 
     @ApiOperation("通过关键词查找")
