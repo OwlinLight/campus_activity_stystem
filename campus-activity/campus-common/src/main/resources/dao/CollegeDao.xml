@@ -11,4 +11,10 @@
     <select id="listAllCollege" resultMap="CollegeMap">
         select * from college
     </select>
+    <select id="getCollegeId" parameterType="String" resultType="Long">
+        select id from college where name = #{collegeName}
+    </select>
+    <select id="getCollege" parameterType="Long" resultMap="CollegeMap">
+        select * from college where id = #{id} limit 1
+    </select>
 </mapper>

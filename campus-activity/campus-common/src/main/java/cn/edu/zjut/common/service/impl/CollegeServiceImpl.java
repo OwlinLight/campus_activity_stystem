@@ -19,4 +19,13 @@ public class CollegeServiceImpl implements CollegeService {
     }
 
 
+    @Override
+    public Long getCollegeId(String collegeName) {
+        return collegeDao.getCollegeId(collegeName);
+    }
+
+    @Override
+    public College getCollege(Long id) {
+        return collegeDao.getCollege(id);
+    }
 }
