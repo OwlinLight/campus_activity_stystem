@@ -38,19 +38,19 @@
     <select id="listActivityPassed" resultMap="ShowacMap">
         select t1.id,t1.name as activityName,t1.start_time,t1.end_time, t2.name as collegeName,t3.name as directorName
         from activity t1, college t2, user t3, status t4
-        where t1.status_id = t4.id and result = 'pass' and  t1.college_id = t2.id and t1.director_id = t3.id
+        where t1.status_id = t4.id and result = 'pass' and  t1.college_id = t2.id and t1.director_id = t3.staff_id
     </select>
     <select id="listActivityPending" resultMap="ShowacMap">
         select t1.id,t1.name as activityName,t1.start_time,t1.end_time, t2.name as collegeName,t3.name as directorName
         from activity t1, college t2, user t3, status t4
-        where t1.status_id = t4.id and result = 'pending' and  t1.college_id = t2.id and t1.director_id = t3.id
+        where t1.status_id = t4.id and result = 'pending' and  t1.college_id = t2.id and t1.director_id = t3.staff_id
     </select>
 
     <!--    通过关键词查找2-->
     <select id="askBykeywords" parameterType="cn.edu.zjut.common.domain.Keywords" resultMap="ShowacMap">
         select t1.id,t1.name as activityName,t1.start_time,t1.end_time, t2.name as collegeName,t3.name as directorName
         from activity t1, college t2, user t3, status t4
-        where t1.college_id = t2.id and t1.director_id = t3.id and t4.result = #{status} and t4.id = t1.status_id
+        where t1.college_id = t2.id and t1.director_id = t3.staff_id and t4.result = #{status} and t4.id = t1.status_id
         <if test="activityName != null">
             and POSITION(#{activityName} IN t1.name)
         </if>
@@ -83,7 +83,7 @@
         SELECT
         <include refid="Showac_List"/>
         FROM activity t1, college t2, user t3, status t4
-        WHERE t1.college_id = t2.id AND t1.director_id = t3.id AND t1.status_id = t4.id
+        WHERE t1.college_id = t2.id AND t1.director_id = t3.staff_id AND t1.status_id = t4.id
         AND t3.staff_id = #{staffID}
     </select>
 

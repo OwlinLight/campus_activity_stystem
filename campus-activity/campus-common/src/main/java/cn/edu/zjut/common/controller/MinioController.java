@@ -37,7 +37,7 @@ public class MinioController {
     private String SECRET_KEY;
 
     @ApiOperation("文件上传")
-    @RequestMapping(value = "/minio/upload", method = RequestMethod.POST)
+    @RequestMapping(value = "/activity/minio/upload", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult upload(@RequestParam("file") MultipartFile file) {
         try {
@@ -69,7 +69,7 @@ public class MinioController {
     }
 
     @ApiOperation("文件删除")
-    @RequestMapping(value = "/minio/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/activity/minio/delete", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult delete(@RequestParam("objectName") String objectName) {
         try {

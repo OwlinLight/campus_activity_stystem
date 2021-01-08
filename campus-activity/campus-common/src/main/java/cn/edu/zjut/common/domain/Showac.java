@@ -135,4 +135,23 @@ public class Showac implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Showac{" +
+                "id=" + id +
+                ", activityName='" + activityName + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", collegeName='" + collegeName + '\'' +
+                ", directorName='" + directorName + '\'' +
+                ", auditor_id=" + auditor_id +
+                ", apply_time=" + apply_time +
+                ", result='" + result + '\'' +
+                ", people_limit=" + people_limit +
+                ", activity_img='" + activity_img + '\'' +
+                ", activity_intro='" + activity_intro + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }
