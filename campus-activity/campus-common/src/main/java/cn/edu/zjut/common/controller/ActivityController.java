@@ -56,59 +56,17 @@ public class ActivityController {
     public CommonResult createActivity(@RequestBody Showac showac) {
         try {
             CommonResult commonResult;
-            int cnt1 = 0;
-            int cnt2 = 0;
-            int count = 0;
-            Activity activity = new Activity();
-            ActivityInfo activityInfo = new ActivityInfo();
-            Status status = new Status();
-
-//            Date currentTime = new Date();//申请时间
-//            SimpleDateFormat myfmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            Date currentTime_2 = myfmt.parse(myfmt.format(currentTime));
-//            System.out.println(myfmt.format(currentTime));
-
-
-            Long newActivityId = activityService.getLastId() + 1;
-            System.out.println("newac is " + newActivityId);
-            Long newStatusId = statusService.getLastId() + 1;
-            System.out.println("newst is " + newStatusId);
-
-            //初始化status
-            status.setActivity_id(newActivityId);
-            status.setAuditor_id(showac.getAuditor_id());
-//            status.setApply_time(currentTime);
-            status.setResult("pending");
-            cnt1 = statusService.createStatus(status);
-
-
-            //初始化activityInfo
-            activityInfo.setActivityId(newActivityId);
-            activityInfo.setPeople_limit(showac.getPeople_limit());
-            activityInfo.setActivity_img(showac.getActivity_img());
-            activityInfo.setActivity_intro(showac.getActivity_intro());
-            cnt2 = activityInfoService.createActivityInfo(activityInfo);
-
-
-            //初始化activity
-//        activity.setId(showac.getId());
-            activity.setName(showac.getActivityName());
-            activity.setStartTime(showac.getStartTime());
-            activity.setEndTime(showac.getEndTime());
-            activity.setCollege_id(collegeService.getCollegeId(showac.getCollegeName()));
-            activity.setDirector_id(showac.getAuditor_id());
-            activity.setStatus_id(newStatusId);
-            count = activityService.createActivity(activity);
-
-            System.out.println("cnt1 = " + cnt1 + " cnt2 = " + cnt2 + " count = " + count);
-            if (cnt1 == 1 && cnt2 == 1 && count == 1) {
-                System.out.println("Oh Shit!!!!!!!!!!!!");
-                commonResult = CommonResult.success(activity);
-                LOGGER.debug("createActivity success:{}", activity);
+            showac.setCollege_id(collegeService.getCollegeId(showac.getCollegeName()));
+            showac.setResult("pending");
+            int cnt = activityService.createActivity(showac);
+//            System.out.println("cnt is "+cnt);
+            if (cnt == 0) {
+//                System.out.println("Oh Shit!!!!!!!!!!!!");
+                commonResult = CommonResult.success(showac);
+                LOGGER.debug("createActivity success:{}", showac);
             } else {
-
                 commonResult = CommonResult.failed("操作失败");
-                LOGGER.debug("createActivity failed:{}", activity);
+                LOGGER.debug("createActivity failed:{}", showac);
             }
             return commonResult;
         } catch (Exception e) {

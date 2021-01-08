@@ -11,7 +11,7 @@ public interface ActivityService {
 
     List<Showac> listAllActivity();
 
-    int createActivity(Activity activity);
+    int createActivity(Showac showac);
 
     int updateActivity(Long id, Activity activity);
 

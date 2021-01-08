@@ -87,15 +87,19 @@
         AND t3.staff_id = #{staffID}
     </select>
 
-    <insert id="createActivity" parameterType="cn.edu.zjut.common.domain.Activity">
-        <!-- selectKey获取新增的主键 -->
+    <insert id="createActivity" parameterType="cn.edu.zjut.common.domain.Showac">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
+        begin;
+        insert into status (auditor_id, apply_time,result)
+        values(#{auditor_id, jdbcType=INTEGER},NOW(),#{result,jdbcType=VARCHAR});
         insert into activity (name, start_time, end_time,college_id, director_id, status_id) values
-        (#{name,jdbcType=VARCHAR},
-        #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{college_id,jdbcType=INTEGER},
-        #{director_id,jdbcType=INTEGER}, #{status_id,jdbcType=INTEGER})
+        (#{activityName,jdbcType=VARCHAR},#{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+        #{college_id,jdbcType=INTEGER},#{auditor_id,jdbcType=INTEGER}, LAST_INSERT_ID());
+        insert into activity_info (activity_id, people_limit,activity_img,activity_intro)
+        values(LAST_INSERT_ID(),#{people_limit, jdbcType=INTEGER},#{activity_img, jdbcType=VARCHAR},#{activity_intro, jdbcType=VARCHAR});
+        commit;
     </insert>
     <update id="updateActivity" parameterType="Long">
         update activity

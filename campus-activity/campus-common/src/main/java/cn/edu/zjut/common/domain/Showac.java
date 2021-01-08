@@ -20,6 +20,16 @@ public class Showac implements Serializable {
     private String collegeName;
     private String directorName;
     private Long auditor_id;
+    private Long college_id;
+
+    public Long getCollege_id() {
+        return college_id;
+    }
+
+    public void setCollege_id(Long college_id) {
+        this.college_id = college_id;
+    }
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date apply_time;
 

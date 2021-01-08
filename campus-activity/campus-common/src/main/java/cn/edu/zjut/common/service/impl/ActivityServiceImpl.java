@@ -27,8 +27,8 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public int createActivity(Activity activity) {
-        return activityDao.createActivity(activity);
+    public int createActivity(Showac showac) {
+        return activityDao.createActivity(showac);
     }
 
     @Override

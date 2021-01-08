@@ -15,7 +15,7 @@ public interface ActivityDao {
 
     List<Showac> listActivityPending();
 
-    int createActivity(Activity activity);
+    int createActivity(Showac showac);
 
     int updateActivity(Activity activity);
 
