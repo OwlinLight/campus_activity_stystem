@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import cn.edu.zjut.common.domain.Sha256;
+import cn.edu.zjut.common.utils.Sha256;
 
 import java.util.List;
 

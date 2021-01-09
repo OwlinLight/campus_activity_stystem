@@ -136,4 +136,9 @@
         delete from activity
         where id=#{id,jdbcType=INTEGER}
     </delete>
+    <select id="getPositionByActivityId" parameterType="Long" resultType="String">
+        select position.name
+        from activity,position
+        where activity.postition_id=postition.id
+    </select>
 </mapper>

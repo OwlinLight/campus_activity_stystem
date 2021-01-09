@@ -80,4 +80,9 @@ public class ActivityServiceImpl implements ActivityService {
     public Long getLastId() {
         return activityDao.getLastId();
     }
+
+    @Override
+    public String getPositionByActivityId(Long activityId) {
+        return activityDao.getPositionByActivityId(activityId);
+    }
 }

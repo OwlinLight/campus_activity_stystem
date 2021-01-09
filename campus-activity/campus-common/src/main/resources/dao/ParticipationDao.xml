@@ -5,6 +5,7 @@
 <mapper namespace="cn.edu.zjut.common.dao.ParticipationDao">
     <resultMap id="ParticipationMap" type="Participation">
         <id column="staff_id" jdbcType="INTEGER" property="staffId"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
         <result column="register_time" jdbcType="VARCHAR" property="registerTime"/>
         <result column="enroll_time" jdbcType="TIMESTAMP" property="enrollTime"/>
         <result column="quit_time" jdbcType="TIMESTAMP" property="quitTime"/>
