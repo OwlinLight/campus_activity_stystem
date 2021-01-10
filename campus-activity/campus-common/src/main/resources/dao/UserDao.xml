@@ -42,6 +42,11 @@
         from user
         where staff_id=#{staffId}
     </select>
+    <select id="getAllUser" resultMap="UserMap">
+        select
+        <include refid="User1"/>
+        from user
+    </select>
     <select id="getUserActivity" parameterType="Long" resultMap="ActivityMap">
         SELECT * FROM activity where(activity.id =
                                      any(SELECT activity_id FROM participation WHERE participation.staff_id =#{staffId}))
@@ -50,5 +55,36 @@
     <select id="askIdByName" parameterType="String" resultType="Long">
         select id from user where name=#{userName} limit 1
     </select>
+    <!--  删除用户-->
+    <delete id="deleteUser" parameterType="java.lang.Long">
+        delete from user
+        where staff_id=#{staffId,jdbcType=INTEGER}
+    </delete>
+    <update id="updateUser" parameterType="Long">
+        update user
+        set
+        <if test="staffId != null">
+            staff_id = #{staffId}
+        </if>
+        <if test="password != null">
+            ,password = #{password}
+        </if>
+        <if test="name != null">
+            ,name = #{name}
+        </if>
+        <if test="role != null">
+            ,role = #{role}
+        </if>
+        <if test="college_id != null">
+            ,college_id = #{college_id}
+        </if>
+        <if test="user_class != null">
+            ,class = #{user_class}
+        </if>
+        <if test="phone != null">
+            ,phone = #{phone}
+        </if>
+        where staff_id=#{staffId}
+    </update>
 </mapper>
 
