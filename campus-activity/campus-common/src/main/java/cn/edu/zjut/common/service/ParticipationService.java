@@ -18,4 +18,5 @@ public interface ParticipationService {
 
     List<Participation> listAllParticipation(Long activityId);
 
+    int updateStaff_id(Long staffId);
 }

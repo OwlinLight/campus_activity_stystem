@@ -33,6 +33,12 @@
         where staff_id=#{staffId,jdbcType=INTEGER}
         and activity_id=#{activityId,jdbcType=INTEGER}
     </update>
+    <update id="updateStaff_id" parameterType="Long">
+        update participation
+        set
+        staff_id=#{staffId}
+        where staff_id=#{staffId,jdbcType=INTEGER}
+    </update>
     <select id="listParticipation" parameterType="Long" resultMap="ParticipationMap">
         select participation.staff_id,register_time,enroll_time,quit_time,
         user.name as staffName,college.name as collegeName,class,activity.name as activityName
