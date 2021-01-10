@@ -11,6 +11,12 @@ public interface UserDao {
 
     int createUser(User user);
 
+    int deleteUser(Long staffId);
+
+    List<User> ListAllUser();
+
+    int updateUser(User user);
+
     User getUser(Long staffId);
 
     Long askIdByName(String userName);
