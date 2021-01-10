@@ -60,7 +60,7 @@
         delete from user
         where staff_id=#{staffId,jdbcType=INTEGER}
     </delete>
-    <update id="updateUser" parameterType="Long">
+    <update id="updateUser" parameterType="cn.edu.zjut.common.domain.User">
         update user
         set
         <if test="staffId != null">
