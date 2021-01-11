@@ -10,7 +10,7 @@
         <result column="rate" property="description"/>
     </resultMap>
     <sql id="Comment">
-        SELECT id, user_id, activity_id, rate
+        id, user_id, activity_id, rate
     </sql>
     <select id="listActivityComment" resultMap="CommentMap">
         SELECT

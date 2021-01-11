@@ -37,11 +37,6 @@
         SET people_limit = ${limit}
         WHERE activity_id = ${id}
     </update>
-    <update id="updatePeopleRegister">
-        UPDATE activity_info
-        SET people_registered =${peopleRegister}
-        WHERE activity_id = ${activityId}
-    </update>
     <update id="updateActivityInfoPeople" parameterType="ActivityInfo">
         UPDATE activity_info
         SET

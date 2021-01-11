@@ -31,4 +31,6 @@ public interface ActivityDao {
 
     Long getLastId();
 
+    String getPositionByActivityId(Long activityId);
+
 }

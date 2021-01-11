@@ -32,7 +32,12 @@
     <mvc:default-servlet-handler/>
     <!-- 能支持springmvc更高级的一些功能，JSR303校验，快捷的ajax...映射动态请求 -->
     <mvc:annotation-driven/>
-
+    <!-- annotation-driven用于简化开发的配置，
+        注解DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter -->
+    <!-- 使用resources过滤掉不需要dispatcher servlet的资源。
+    使用resources时，必须使用annotation-driven，不然resources元素会阻止任意控制器被调用。
+    如果不使用resources，则annotation-driven可以没有。 -->
+    <!-- 允许css目录下所有文件可见 -->
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
     <mvc:resources mapping="/swagger-ui.html" location="classpath:/META-INF/resources/"/>
 

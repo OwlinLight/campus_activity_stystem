@@ -10,6 +10,14 @@ public interface UserService {
 
     int createUser(User user);
 
+    int deleteUser(int id);
+
+    List<User> ListAllUser();
+
+    int updateUser(int id,User user);
+
+    int insertUser(User user);
+
     /**
      * 根据staffId查找用户
      */

@@ -119,4 +119,7 @@ public class ParticipationServiceImpl implements ParticipationService {
         return participationDao.listParticipation(activityId);
     }
 
+    @Override
+    public int updateStaff_id(Long staffId){ return participationDao.updateStaff_id(staffId);}
+
 }

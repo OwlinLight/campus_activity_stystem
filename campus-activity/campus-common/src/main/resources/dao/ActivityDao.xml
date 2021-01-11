@@ -101,7 +101,7 @@
         values(LAST_INSERT_ID(),#{people_limit, jdbcType=INTEGER},#{activity_img, jdbcType=VARCHAR},#{activity_intro, jdbcType=VARCHAR});
         commit;
     </insert>
-    <update id="updateActivity" parameterType="Long">
+    <update id="updateActivity" parameterType="cn.edu.zjut.common.domain.Activity">
         update activity
         set
         <if test="name != null">
@@ -130,10 +130,14 @@
     <update id="updateStatus" parameterType="cn.edu.zjut.common.domain.Status">
         update activity a,status b set b.result = #{result},
         b.deal_time = #{deal_time} where a.status_id = b.id and a.id = #{activity_id}
-
     </update>
     <delete id="deleteActivity" parameterType="java.lang.Long">
         delete from activity
         where id=#{id,jdbcType=INTEGER}
     </delete>
+    <select id="getPositionByActivityId" parameterType="Long" resultType="String">
+        select position.name
+        from activity,position
+        where activity.postition_id=postition.id
+    </select>
 </mapper>

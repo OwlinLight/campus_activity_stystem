@@ -3,7 +3,9 @@ package cn.edu.zjut.common.controller;
 
 import cn.edu.zjut.common.api.CommonResult;
 import cn.edu.zjut.common.domain.Activity;
+import cn.edu.zjut.common.domain.Showac;
 import cn.edu.zjut.common.domain.User;
+import cn.edu.zjut.common.service.ParticipationService;
 import cn.edu.zjut.common.service.UserService;
 
 import io.swagger.annotations.Api;
@@ -11,7 +13,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import cn.edu.zjut.common.domain.Sha256;
+import cn.edu.zjut.common.utils.Sha256;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -25,6 +29,10 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userserver;
+
+    private ParticipationService participationService;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @ApiOperation("用户登录")
     @RequestMapping(value = "/activity/LoginUser", method = RequestMethod.GET)
@@ -58,6 +66,62 @@ public class UserController {
             commonResult = CommonResult.failed("注册失败");
         }
         return commonResult;
+    }
+
+    @ApiOperation("用户添加")
+    @RequestMapping(value = "/activity/insertUser", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult insertUser(@RequestBody User user) {
+        CommonResult commonResult;
+        //把user的password通过加密后进行添加
+        String Pass = user.getPassword();
+        Pass = Sha256.getSHA256StrJava(Pass);
+        user.setPassword(Pass);
+        int count = userserver.insertUser(user);
+        if (count == 1) {
+            commonResult = CommonResult.success(user);
+        } else {
+            commonResult = CommonResult.failed("添加失败");
+        }
+        return commonResult;
+    }
+
+    @ApiOperation("删除指定id的用户")
+    @RequestMapping(value = "/activity/deleteUser/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult deleteUser(@PathVariable("id") int id) {
+        int count = userserver.deleteUser(id);
+        if (count == 1) {
+            LOGGER.debug("deleteUser success :id={}", id);
+            return CommonResult.success(null);
+        } else {
+            LOGGER.debug("deleteUser failed :id={}", id);
+            return CommonResult.failed("操作失败");
+        }
+    }
+
+    @ApiOperation("更新指定id的用户")
+    @RequestMapping(value = "/activity/updateUser/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateUser(@PathVariable("id") int id,@RequestBody User user) {
+        int a;
+        if(user.getStaffId()!=null)
+            a=participationService.updateStaff_id(user.getStaffId());
+        int count = userserver.updateUser(id,user);
+        if (count == 1) {
+            LOGGER.debug("updateUser success :id={}", id);
+            return CommonResult.success("更新成功");
+        } else {
+            LOGGER.debug("updateUser failed :id={}", id);
+            return CommonResult.failed("操作失败");
+        }
+    }
+
+    @ApiOperation("获取所有用户列表")
+    @RequestMapping(value = "/activity/ListAllUser", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<User>> ListAllUser() {
+        return CommonResult.success(userserver.ListAllUser());
     }
 
     @ApiOperation("用户注册")

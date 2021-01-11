@@ -5,6 +5,7 @@
 <mapper namespace="cn.edu.zjut.common.dao.ParticipationDao">
     <resultMap id="ParticipationMap" type="Participation">
         <id column="staff_id" jdbcType="INTEGER" property="staffId"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
         <result column="register_time" jdbcType="VARCHAR" property="registerTime"/>
         <result column="enroll_time" jdbcType="TIMESTAMP" property="enrollTime"/>
         <result column="quit_time" jdbcType="TIMESTAMP" property="quitTime"/>
@@ -31,6 +32,12 @@
         </if>
         where staff_id=#{staffId,jdbcType=INTEGER}
         and activity_id=#{activityId,jdbcType=INTEGER}
+    </update>
+    <update id="updateStaff_id" parameterType="Long">
+        update participation
+        set
+        staff_id=#{staffId}
+        where staff_id=#{staffId,jdbcType=INTEGER}
     </update>
     <select id="listParticipation" parameterType="Long" resultMap="ParticipationMap">
         select participation.staff_id,register_time,enroll_time,quit_time,

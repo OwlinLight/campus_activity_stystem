@@ -1,4 +1,4 @@
-package cn.edu.zjut.common.domain;
+package cn.edu.zjut.common.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

@@ -15,4 +15,6 @@ public interface ParticipationDao {
     List<Participation> listParticipation(Long activityId);
 
     int findParticipation(Participation participation);
+
+    int updateStaff_id(Long staffId);
 }
