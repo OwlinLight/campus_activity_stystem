@@ -60,7 +60,7 @@
     </select>
 <!--    通过姓名查找id-->
     <select id="askIdByName" parameterType="String" resultType="Long">
-        select id from user where name=#{userName} limit 1
+        select staff_id from user where name=#{userName} limit 1
     </select>
     <!--  删除用户-->
     <delete id="deleteUser" parameterType="java.lang.Long">
