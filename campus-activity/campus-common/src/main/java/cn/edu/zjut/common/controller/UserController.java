@@ -28,9 +28,7 @@ import java.util.List;
 @Controller
 public class UserController {
     @Autowired
-    private UserService userserver;
-
-    private ParticipationService participationService;
+    private UserService userservice;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
@@ -41,7 +39,7 @@ public class UserController {
         CommonResult commonResult;
         //把password通过加密后再进行登录
         password = Sha256.getSHA256StrJava(password);
-        User user = (User) userserver.loginUser(staff_id, password);
+        User user = (User) userservice.loginUser(staff_id, password);
         if (user == null) {
             commonResult = CommonResult.failed("登录失败");
         } else {
@@ -59,7 +57,7 @@ public class UserController {
         String Pass = user.getPassword();
         Pass = Sha256.getSHA256StrJava(Pass);
         user.setPassword(Pass);
-        int count = userserver.createUser(user);
+        int count = userservice.createUser(user);
         if (count == 1) {
             commonResult = CommonResult.success(user);
         } else {
@@ -74,10 +72,11 @@ public class UserController {
     public CommonResult insertUser(@RequestBody User user) {
         CommonResult commonResult;
         //把user的password通过加密后进行添加
-        String Pass = user.getPassword();
+        String StaffId=user.getStaffId().toString();
+        String Pass = StaffId.substring(StaffId.length()-6);
         Pass = Sha256.getSHA256StrJava(Pass);
         user.setPassword(Pass);
-        int count = userserver.insertUser(user);
+        int count = userservice.insertUser(user);
         if (count == 1) {
             commonResult = CommonResult.success(user);
         } else {
@@ -90,7 +89,7 @@ public class UserController {
     @RequestMapping(value = "/activity/deleteUser/{id}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult deleteUser(@PathVariable("id") int id) {
-        int count = userserver.deleteUser(id);
+        int count = userservice.deleteUser(id);
         if (count == 1) {
             LOGGER.debug("deleteUser success :id={}", id);
             return CommonResult.success(null);
@@ -104,10 +103,7 @@ public class UserController {
     @RequestMapping(value = "/activity/updateUser/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult updateUser(@PathVariable("id") int id,@RequestBody User user) {
-        int a;
-        if(user.getStaffId()!=null)
-            a=participationService.updateStaff_id(user.getStaffId());
-        int count = userserver.updateUser(id,user);
+        int count = userservice.updateUser(id,user);
         if (count == 1) {
             LOGGER.debug("updateUser success :id={}", id);
             return CommonResult.success("更新成功");
@@ -121,7 +117,7 @@ public class UserController {
     @RequestMapping(value = "/activity/ListAllUser", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<User>> ListAllUser() {
-        return CommonResult.success(userserver.ListAllUser());
+        return CommonResult.success(userservice.ListAllUser());
     }
 
     @ApiOperation("用户注册")
@@ -130,7 +126,7 @@ public class UserController {
     public CommonResult getUserActivity(@RequestParam(value = "staffId") Long staffId) {
         CommonResult commonResult;
 
-        List<Activity> activity = userserver.getUserActivity(staffId);
+        List<Activity> activity = userservice.getUserActivity(staffId);
         commonResult = CommonResult.success(activity);
         return commonResult;
     }

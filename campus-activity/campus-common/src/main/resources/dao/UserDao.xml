@@ -70,9 +70,6 @@
     <update id="updateUser" parameterType="cn.edu.zjut.common.domain.User">
         update user
         set
-        <if test="staffId != null">
-            staff_id = #{staffId}
-        </if>
         <if test="password != null">
             ,password = #{password}
         </if>
