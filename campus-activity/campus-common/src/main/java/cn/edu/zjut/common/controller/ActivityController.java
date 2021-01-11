@@ -8,7 +8,6 @@ import cn.edu.zjut.common.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.poi.hssf.record.NameCommentRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +33,6 @@ public class ActivityController {
 
     @Autowired
     private CollegeService collegeService;
-
-    @Autowired
-    private StatusService statusService;
-
-    @Autowired
-    private ActivityInfoService activityInfoService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ActivityController.class);
 

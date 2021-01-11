@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 定时任务：发送活动通知短信
+ * SpringTask定时任务：发送活动通知短信
  * Created by iris on 2020/12/31.
  */
 @Component
@@ -72,7 +72,7 @@ public class SendSmsTask {
             }
         }
         //测试代码
-//                String phone = "19858180151";
+//        String phone = "19858180151";
 //        String[] phoneNumberSet1 = {"+86" + phone};
 //        String[] templateParamSet1 = {"篮球比赛", "12-12 15:00", "篮球场"};
 //        String templateID = "838807";

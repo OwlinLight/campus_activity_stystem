@@ -3,9 +3,7 @@ package cn.edu.zjut.common.controller;
 
 import cn.edu.zjut.common.api.CommonResult;
 import cn.edu.zjut.common.domain.Activity;
-import cn.edu.zjut.common.domain.Showac;
 import cn.edu.zjut.common.domain.User;
-import cn.edu.zjut.common.service.ParticipationService;
 import cn.edu.zjut.common.service.UserService;
 
 import io.swagger.annotations.Api;
@@ -20,10 +18,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 
-@Api(
-        tags = {"UserController"},
-        description = "用户管理"
-)
+@Api(tags = {"UserController"}, description = "用户管理")
 @CrossOrigin // 允许所有ip跨域
 @Controller
 public class UserController {
@@ -72,8 +67,8 @@ public class UserController {
     public CommonResult insertUser(@RequestBody User user) {
         CommonResult commonResult;
         //把user的password通过加密后进行添加
-        String StaffId=user.getStaffId().toString();
-        String Pass = StaffId.substring(StaffId.length()-6);
+        String StaffId = user.getStaffId().toString();
+        String Pass = StaffId.substring(StaffId.length() - 6);
         Pass = Sha256.getSHA256StrJava(Pass);
         user.setPassword(Pass);
         int count = userservice.insertUser(user);
@@ -102,8 +97,8 @@ public class UserController {
     @ApiOperation("更新指定id的用户")
     @RequestMapping(value = "/activity/updateUser/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult updateUser(@PathVariable("id") int id,@RequestBody User user) {
-        int count = userservice.updateUser(id,user);
+    public CommonResult updateUser(@PathVariable("id") int id, @RequestBody User user) {
+        int count = userservice.updateUser(id, user);
         if (count == 1) {
             LOGGER.debug("updateUser success :id={}", id);
             return CommonResult.success("更新成功");
