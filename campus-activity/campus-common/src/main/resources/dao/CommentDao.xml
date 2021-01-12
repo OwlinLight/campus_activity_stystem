@@ -7,15 +7,18 @@
         <id column="id" property="id"/>
         <result column="user_id" property="userId"/>
         <result column="activity_id" property="activityId"/>
-        <result column="rate" property="description"/>
+        <result column="rate" property="rate"/>
+        <result column="description" property="description"/>
+
     </resultMap>
     <sql id="Comment">
-        id, user_id, activity_id, rate
+        id, user_id, activity_id, rate, description
     </sql>
     <select id="listActivityComment" resultMap="CommentMap">
         SELECT
         <include refid="Comment"/>
-        WHERE ctivity_id = #{activityId}
+        FROM comment
+        WHERE activity_id = #{activityId}
     </select>
 
     <insert id="createComment" parameterType="Comment">
