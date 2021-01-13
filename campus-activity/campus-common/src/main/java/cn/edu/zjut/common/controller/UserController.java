@@ -103,7 +103,36 @@ public class UserController {
     @RequestMapping(value = "/activity/updateUser/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult updateUser(@PathVariable("id") int id,@RequestBody User user) {
+        String password=user.getPassword();
+        password=Sha256.getSHA256StrJava(password);
+        user.setPassword(password);
         int count = userservice.updateUser(id,user);
+        if (count == 1) {
+            LOGGER.debug("updateUser success :id={}", id);
+            return CommonResult.success("更新成功");
+        } else {
+            LOGGER.debug("updateUser failed :id={}", id);
+            return CommonResult.failed("操作失败");
+        }
+    }
+
+    @ApiOperation("修改密码")
+    @RequestMapping(value = "/activity/changePassword/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult changepassword(@PathVariable("id") int id,
+                                       @RequestParam(value = "oldPass") String oldPass,
+                                       @RequestParam(value = "newPass") String newPass,
+                                       @RequestParam(value = "newPass1") String newPass1) {
+        int count;
+        User user=userservice.getUser((long)id);
+        if(user.getPassword().equals(Sha256.getSHA256StrJava(oldPass)) && newPass.equals(newPass1)) {
+            user.setPassword(Sha256.getSHA256StrJava(newPass));
+            count = userservice.changepassword(id, user);
+        }
+        else {
+            LOGGER.debug("updateUser failed :id={}", id);
+            return CommonResult.failed("操作失败");
+        }
         if (count == 1) {
             LOGGER.debug("updateUser success :id={}", id);
             return CommonResult.success("更新成功");
@@ -120,12 +149,11 @@ public class UserController {
         return CommonResult.success(userservice.ListAllUser());
     }
 
-    @ApiOperation("用户注册")
+    @ApiOperation("获得指定id的活动")
     @RequestMapping(value = "/activity/getUserActivity", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult getUserActivity(@RequestParam(value = "staffId") Long staffId) {
         CommonResult commonResult;
-
         List<Activity> activity = userservice.getUserActivity(staffId);
         commonResult = CommonResult.success(activity);
         return commonResult;

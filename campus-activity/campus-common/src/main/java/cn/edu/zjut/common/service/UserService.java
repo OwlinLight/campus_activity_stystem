@@ -16,6 +16,8 @@ public interface UserService {
 
     int updateUser(int id,User user);
 
+    int changepassword(int id,User user);
+
     int insertUser(User user);
 
     /**

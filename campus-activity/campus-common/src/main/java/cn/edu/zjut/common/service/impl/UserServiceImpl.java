@@ -39,6 +39,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int changepassword(int id,User user) {
+        user.setId(id);
+        return userdao.changepassword(user);
+    }
+
+    @Override
     public List<User> ListAllUser() { return userdao.ListAllUser(); }
 
     @Override

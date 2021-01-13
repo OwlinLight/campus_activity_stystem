@@ -67,6 +67,11 @@
         delete from user
         where id=#{dd,jdbcType=INTEGER}
     </delete>
+    <update id="changepassword" parameterType="cn.edu.zjut.common.domain.User">
+        update user
+        set password = #{password}
+        where id=#{id}
+    </update>
     <update id="updateUser" parameterType="cn.edu.zjut.common.domain.User">
         update user
         set

@@ -19,6 +19,8 @@ public interface UserDao {
 
     int updateUser(User user);
 
+    int changepassword(User user);
+
     User getUser(Long staffId);
 
     Long askIdByName(String userName);
