@@ -36,7 +36,7 @@
         var result;
         $.ajax({
             type: "POST",
-            url: "http://192.168.31.226/activity/enroll",
+            url: "http://localhost:8080/activity/enroll",
             data: JSON.stringify(myData),
             contentType: "application/json;charset=UTF-8",
             success: function (callback) {

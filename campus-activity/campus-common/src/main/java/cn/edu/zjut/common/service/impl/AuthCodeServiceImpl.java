@@ -34,6 +34,7 @@ public class AuthCodeServiceImpl implements AuthCodeService {
         for (int i = 0; i < 6; i++) {
             sb.append(random.nextInt(10));
         }
+
         String[] phoneNumberSet1 = {"+86" + telephone};
         String[] templateParamSet1 = {sb.toString(), "5"};
         String templateID = "832776";

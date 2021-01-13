@@ -30,11 +30,19 @@
     <!--两个标准配置  -->
     <!-- 将springmvc不能处理的请求交给tomcat -->
     <mvc:default-servlet-handler/>
-    <!-- springMVC注解驱动 -->
-    <!-- 能支持springmvc更高级的一些功能，JSR303校验，快捷的ajax...映射动态请求 -->
-    <mvc:annotation-driven/>
+
     <!-- annotation-driven用于简化开发的配置，
         注解DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter -->
+    <!--支持springMVC注解驱动
+      在spring中一般采用@RequestMapping注解来完成映射关系
+      要想使@RequestMapping注解生效
+      必须向上下文中注册DefaultAnnotationHandlerMapping
+      和一个AnnotationMethodHandlerAdapter实例
+      这两个实例分别在类级别和方法级别处理。
+      而annotation-driven配置帮助我们自动完成上述两个实例的注入。 -->
+    <!-- 能支持springmvc更高级的一些功能，JSR303校验，快捷的ajax...映射动态请求 -->
+    <mvc:annotation-driven/>
+
     <!-- 使用resources过滤掉不需要dispatcher servlet的资源。
     使用resources时，必须使用annotation-driven，不然resources元素会阻止任意控制器被调用。
     如果不使用resources，则annotation-driven可以没有。 -->
