@@ -22,30 +22,39 @@ public class IndexInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
     private UserService userService;
-    public IndexInterceptor() {}
 
+    public IndexInterceptor() {
+    }
+
+    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         RequestWrapper myRequestWrapper = new RequestWrapper((HttpServletRequest) request);
         String body = myRequestWrapper.getBody();
 //        System.out.println("我是拦截器："+body);
 
         // do something
-        JSONObject obj=JSON.parseObject(body);
+        JSONObject obj = JSON.parseObject(body);
         Long cnt = collegeService.getCollegeId(obj.getString("collegeName"));
         Long cnt1 = userService.askIdByName(obj.getString("directorName"));
-        System.out.println(cnt+" "+ cnt1+ " "+obj.getString("directorName"));
-        if(cnt == null || cnt1 == null){
+        System.out.println(cnt + " " + cnt1 + " " + obj.getString("directorName"));
+        if (cnt == null || cnt1 == null) {
             return false;
         }
         return true;
 
     }
+
+    @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         super.postHandle(request, response, handler, modelAndView);
     }
+
+    @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         super.afterCompletion(request, response, handler, ex);
     }
+
+    @Override
     public void afterConcurrentHandlingStarted(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         super.afterConcurrentHandlingStarted(request, response, handler);
     }

@@ -1,8 +1,6 @@
 package cn.edu.zjut.common.wrapper;
 
 
-
-
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +18,7 @@ public class RequestWrapper extends HttpServletRequestWrapper {
         try {
             inputStream = request.getInputStream();
             if (inputStream != null) {
-                bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"UTF-8"));
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 char[] charBuffer = new char[128];
                 int bytesRead = -1;
                 while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
@@ -35,16 +33,14 @@ public class RequestWrapper extends HttpServletRequestWrapper {
             if (inputStream != null) {
                 try {
                     inputStream.close();
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             if (bufferedReader != null) {
                 try {
                     bufferedReader.close();
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -59,11 +55,14 @@ public class RequestWrapper extends HttpServletRequestWrapper {
             public boolean isFinished() {
                 return false;
             }
+
             public boolean isReady() {
                 return false;
             }
+
             public void setReadListener(ReadListener readListener) {
             }
+
             @Override
             public int read() throws IOException {
                 return byteArrayInputStream.read();
@@ -75,7 +74,7 @@ public class RequestWrapper extends HttpServletRequestWrapper {
 
     @Override
     public BufferedReader getReader() throws IOException {
-        return new BufferedReader(new InputStreamReader(this.getInputStream(),"UTF-8"));
+        return new BufferedReader(new InputStreamReader(this.getInputStream(), "UTF-8"));
     }
 
     public String getBody() {
