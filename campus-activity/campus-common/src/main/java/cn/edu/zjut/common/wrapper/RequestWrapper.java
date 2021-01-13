@@ -52,14 +52,17 @@ public class RequestWrapper extends HttpServletRequestWrapper {
     public ServletInputStream getInputStream() throws IOException {
         final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body.getBytes("UTF-8"));
         ServletInputStream servletInputStream = new ServletInputStream() {
+            @Override
             public boolean isFinished() {
                 return false;
             }
 
+            @Override
             public boolean isReady() {
                 return false;
             }
 
+            @Override
             public void setReadListener(ReadListener readListener) {
             }
 
