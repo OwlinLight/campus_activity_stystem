@@ -61,4 +61,7 @@
         (#{activityId, jdbcType=VARCHAR},#{people_limit, jdbcType=INTEGER},
         #{activity_img, jdbcType=VARCHAR},#{activity_intro, jdbcType=VARCHAR})
     </insert>
+    <select id="getRegisterPeople"  resultType="Integer">
+        select people_limit from activity_info where activity_id = #{activityId}
+    </select>
 </mapper>

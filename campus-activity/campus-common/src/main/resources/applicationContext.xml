@@ -63,6 +63,11 @@
         <aop:pointcut expression="execution(* cn.edu.zjut.common.service..*(..))" id="txPoint"/>
         <!-- 配置事务增强 -->
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint"/>
+        
+        <aop:aspect id="security" ref="securityHandler2">
+            <aop:pointcut id="updateMethod" expression="execution(* cn.edu.zjut.common.service.impl.ActivityInfoServiceImpl.updatePeopleLimit(..))"/>
+            <aop:before method="checkSecurity" pointcut-ref="updateMethod"/>
+        </aop:aspect>
     </aop:config>
 
     <!--配置事务增强，事务如何切入  -->
@@ -74,6 +79,8 @@
             <tx:method name="get*" read-only="true"/>
         </tx:attributes>
     </tx:advice>
+    <bean id="securityHandler2" class="cn.edu.zjut.common.aspect.SecurityHandler"/>
+    
 
     <!-- 解决报错：but was actually of type 'com.sun.proxy.$Proxy36'
     Aspect的实现原理是基于接口的动态代理技术，而不是基于实现类的动态代理技术。
