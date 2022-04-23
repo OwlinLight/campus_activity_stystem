@@ -4,9 +4,11 @@
 
 除此之外，系统与学生校园生活的方方面面深度融合，破除了传统活动申报系统，第二课堂积分软件的僵硬死板，杂乱无章的特点。能够根据使用者报名活动的习惯进行智能推荐。同时，可以基于使用者的地理位置，实时推荐距离相近的活动，减少了可能的时间浪费，提高了参加活动的效率。除此之外，管理员可以看到活动的实时热力图，以及一段时间之内的时间统计，可以生成相关分析，进行具体可操作的调整建议。
 
-![用例图](.\pic\image-20220422212922258.png)
+![Diagram Description automatically generated](media/cf15bc56cc103e25edda0c1d97fb7c11.png)
 
-![E-R](.\pic\image-20220422213001833.png)
+![Timeline Description automatically generated](media/a58804d34ca91d064e14e5bbdf7a58a6.png)
+
+图表 7 E-R图
 
 ## 6.1普通用户系统实现
 
