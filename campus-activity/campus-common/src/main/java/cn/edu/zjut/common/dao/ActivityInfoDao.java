@@ -17,6 +17,4 @@ public interface ActivityInfoDao {
     int updateActivityInfoPeople(ActivityInfo activityInfo);
 
     int createActivityInfo(ActivityInfo activityInfo);
-
-    int getRegisterPeople(int activityId);
 }

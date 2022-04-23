@@ -5,7 +5,6 @@ import cn.edu.zjut.common.domain.*;
 import cn.edu.zjut.common.service.ActivityInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +38,9 @@ public class ActivityInfoController {
     }
 
     @ApiOperation("更新指定id的限定人数")
-    @RequestMapping(value = "/activity/activityInfo/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/activity/activityInfo/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult updateActivity(@RequestParam(value = "id") Long id,
-                                       @RequestParam(value = "limit") Integer limit) {
+    public CommonResult updateActivity(@PathVariable("id") Long id, @RequestBody int limit) {
         CommonResult commonResult;
         int count = activityInfoService.updatePeopleLimit(id, limit);
         if (count == 1) {
