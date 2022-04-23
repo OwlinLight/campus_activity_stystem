@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author Charlie
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,4 +16,5 @@ public class Comment {
     private int activityId;
     private int rate;
     private String description;
+    private int replyTo;
 }

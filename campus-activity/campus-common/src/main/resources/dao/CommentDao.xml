@@ -9,8 +9,9 @@
         <result column="activity_id" property="activityId"/>
         <result column="rate" property="rate"/>
         <result column="description" property="description"/>
-
+        <result column="reply" property="reply"/>
     </resultMap>
+
     <sql id="Comment">
         id, user_id, activity_id, rate, description
     </sql>
@@ -29,5 +30,8 @@
         INSERT INTO `comment` (user_id, activity_id, rate, description)
         VALUES(#{userId}, #{activityId}, #{rate}, #{description})
     </insert>
+
+
+
 
 </mapper>

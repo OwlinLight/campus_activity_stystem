@@ -9,4 +9,6 @@ public interface CommentDao {
     List<Comment> listActivityComment(Long activityId);
 
     int createComment(Comment comment);
+
+
 }
