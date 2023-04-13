@@ -1,5 +1,98 @@
 # campus_activity_stystem
 
+Our project has basically all the basic functions, including student registration and participation, check-in and check-out, event organizers applying for and organizing events, reviewers approving events, and security checking event qualifications. Combined with our unique geolocation-based recommendation system, students are less likely to miss out on the credits they could have earned due to lack of information.
+
+In addition, the system is deeply integrated into all aspects of student campus life, breaking the rigid and disorderly characteristics of traditional event application systems and second classroom credit software. It can intelligently recommend activities based on the user's registration habits. At the same time, based on the user's geographical location, it can recommend activities in real-time that are nearby, reducing possible time waste and improving the efficiency of attending activities. In addition, administrators can see the real-time heat map of the activities and the time statistics within a period of time. They can generate relevant analysis and make specific and actionable adjustment suggestions.
+
+![Diagram Description automatically generated](media/cf15bc56cc103e25edda0c1d97fb7c11.png)
+
+![Timeline Description automatically generated](media/a58804d34ca91d064e14e5bbdf7a58a6.png)
+
+Figure 7 E-R Diagram
+
+## 6.1 Implementation of the Common User System
+
+The common user system in this system has functions such as login, registration, creating activities, reviewing approved activities, viewing their own registered activities, viewing their own created activities, and modifying their own passwords.
+
+1. **Login Function**
+
+① The user login interface is [http://localhost:3000/dva-boot-admin\#/dva-boot-admin/sign/login](http://localhost:3000/dva-boot-admin#/dva-boot-admin/sign/login), as shown in the figure below.
+
+![Graphical user interface, website Description automatically generated](media/82b98d3249f03455900e4b7c802ead4f.png)
+
+Figure 6-1
+
+② After entering their student ID and password, the user calls the loginUser() method in /activity/LoginUser to verify their identity information and enter the system to complete the login, as shown in the figure below.
+
+![Graphical user interface, text, application Description automatically generated](media/33d4e0f05fb7578a3aca545f22cfef48.png)
+
+Figure 6-2
+
+Key code:
+
+![Graphical user interface, text, application, email Description automatically generated](media/8b6638f44ca6a1e1d4243be749a5e300.png)
+
+③ Log out of the system
+
+Click "Exit the system" to clear the store stored in the browser and jump to the login page.
+
+![Graphical user interface, text, application, Word Description automatically generated](media/7d0658423640c09d0d64590ca4d3a22a.png)
+
+1. **Registration Functionality**
+   1. The user registration interface is located at [http://localhost:3000/dva-boot-admin\#/dva-boot-admin/sign/login](http://localhost:3000/dva-boot-admin#/dva-boot-admin/sign/login), as shown in the image below.
+
+   ![Registration Interface Screenshot](media/b06b7fb7bca258d061a3638c011ca288.png)
+
+   2. When the user requests a verification code, the `getAuthcode()` method is called to retrieve the code. If the code is entered incorrectly, an error message is displayed, as shown in the image below.
+
+   ![Invalid Verification Code Screenshot](media/cbb91d9a00877963ae33482b2d3beed7.png)
+
+      Key Code:
+
+      ![getAuthcode() Method Code Screenshot](media/007c659c47a349bf14d6b69ed4ba2fed.png)
+
+      ![Verification Code Validation Code Screenshot](media/b5bc18bb18ba3bf7f9fbc4f04fb3e93e.png)
+
+   3. The user enters their information and calls the `createUser()` method in `/activity/createUser`. If the user is created successfully, they are redirected to the registration success page.
+
+      ![Registration Success Screenshot](media/2ae46a994f15f4541cca233f3c4b3b5b.png)
+
+      Key Code:
+
+      ![createUser() Method Code Screenshot](media/0f8fdca7565847fe211a9d7835289c23.png)
+
+2. **Create Activity Functionality**
+   1. The user can click "Create Activity" in the left navigation to enter the create activity page, as shown in the image below.
+
+      ![Create Activity Page Screenshot](media/63e89843256c35dc211ed508e8bc0e09.png)
+
+   2. The user can upload images to the server by calling the `/minio/upload` method, as shown in the image below.
+
+      ![Image Upload Screenshot](media/968c69caec57a4081a52fd289b7b4db1.png)
+
+      The uploaded image information can be viewed in the backend.
+
+      ![Uploaded Image Information Screenshot](media/e2a630f6c09cee5f5525a7a2b115ba6f.png)
+
+      Key Code:
+
+      ![Image Upload Code Screenshot](media/a7752771bf768daed69026d0424c0f88.png)
+
+   3. The user queries location information using the JavaScript library provided by Baidu Bmap to ensure accurate entry of activity location information.
+
+      ![Baidu Bmap Location Query Screenshot](media/e9a7cb3b9c6be161d7fbe4d616fd7cd3.png)
+
+   4. The user creates the corresponding activity information by calling the `createActivity()` method in `/activity/create`. If the activity is created successfully, a success message is displayed, as shown in the image below.
+
+      ![Activity Creation Success Screenshot](media/eada218de4afe78cfd62b1217a4bd086.png)
+
+      Key Code:
+
+      ![createActivity() Method Code Screenshot](media/52e00b5dddcf37a9ba8204553f9a6790.png)
+
+3. **Approve Enrolled Activities**
+   1. The user can click "Enrolled Activities" in the left navigation to enter the enrolled activities page,
+
 我们的项目已经基本具备了基础的所有功能。包括学生报名参与，签到签退。活动举办者申报活动，举办活动的功能。还有审核者审批活动，保卫处检验活动资质的功能。结合我们独到的基于地理位置的推荐系统，学生很难由于信息不足，错失了自己本来可以获得的学分。
 
 除此之外，系统与学生校园生活的方方面面深度融合，破除了传统活动申报系统，第二课堂积分软件的僵硬死板，杂乱无章的特点。能够根据使用者报名活动的习惯进行智能推荐。同时，可以基于使用者的地理位置，实时推荐距离相近的活动，减少了可能的时间浪费，提高了参加活动的效率。除此之外，管理员可以看到活动的实时热力图，以及一段时间之内的时间统计，可以生成相关分析，进行具体可操作的调整建议。
